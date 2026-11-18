@@ -14,7 +14,7 @@ Design inspiré des maquettes validées (fond noir, accent jaune `#FFD60A`).
 
 | Route          | Contenu                                                            |
 | -------------- | ------------------------------------------------------------------ |
-| `/`            | Accueil : hero, « Deux solutions, un même engagement », services, carte de France, téléchargement de l'app |
+| `/`            | Accueil : hero « Reprenez le contrôle », « Deux solutions, un même engagement », services, carte de France, téléchargement de l'app |
 | `/pro`         | Vroom Pro : avantages, étapes, offre 69,90 €/mois, témoignage       |
 | `/contact`     | Moyens de contact, FAQ (accordéon), formulaire de contact           |
 | `/a-propos`    | Mission, engagements, **développé par Riviera Flow (Sophia Antipolis — rivieraflow.com)** |
@@ -29,20 +29,25 @@ npm run build    # build de production
 npm start        # sert le build
 ```
 
-## Déployer sur Vercel
+## Déployer sur GCP (Cloud Run — prod)
 
-Le projet est prêt pour Vercel (Next.js détecté automatiquement, aucune configuration requise) :
+Le site est déployé sur **Cloud Run** dans le projet GCP **`vroom-1776153394` (Vroom - Prod)**, région `europe-west1` (même région que `vroom-api`) :
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/RomainGIRAUDEAU/vroom-website)
+- URL de prod : https://vroom-website-981436003035.europe-west1.run.app
+- Service : `vroom-website` (public, 512Mi / 1 CPU, 0–10 instances)
 
-Ou manuellement :
+Redéployer depuis la source (Cloud Build construit l'image Docker via le `Dockerfile`, `output: "standalone"`) :
 
-1. Aller sur [vercel.com/new](https://vercel.com/new)
-2. « Import Git Repository » → sélectionner ce dépôt GitHub
-3. Laisser les réglages par défaut (framework **Next.js**, build `next build`) → **Deploy**
-4. Chaque `git push` sur `main` déclenche un nouveau déploiement de production
+```bash
+gcloud run deploy vroom-website \
+  --source . \
+  --region europe-west1 \
+  --allow-unauthenticated \
+  --memory 512Mi --cpu 1 --min-instances 0 --max-instances 10 \
+  --port 8080
+```
 
-Domaine conseillé : `vroom.rivieraflow.com` (à configurer dans les settings du projet Vercel).
+Le `Dockerfile` produit une image autonome (`.next/standalone` + `public` + `.next/static`, user non-root `nextjs`, port 8080). Les images du site sont servies directement depuis le CDN Unsplash (`images.unoptimized`), donc aucune dépendance externe au build.
 
 ## Structure
 
