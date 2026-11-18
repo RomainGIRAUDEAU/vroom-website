@@ -49,7 +49,6 @@ Domaine conseillé : `vroom.rivieraflow.com` (à configurer dans les settings du
 ```
 app/            # pages (App Router) + layout + globals.css + icon.svg
 components/     # Header, Footer, icônes SVG, carte de France, mockup app, FAQ, formulaire
-lib/img.ts      # URLs des visuels (Unsplash)
-public/         # assets statiques
-public/         # (rien pour l'instant — images servies depuis le CDN)
+lib/img.ts      # URLs des visuels (CDN Unsplash — aucun binaire dans le repo)
+app/icon.svg    # favicon (V jaune)
 ```
