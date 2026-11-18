@@ -38,8 +38,10 @@ export async function POST(req: Request) {
       { status: 503 }
     );
 
-  const from = process.env.CONTACT_FROM || "Vroom <contact@vroom.fr>";
-  const to = (process.env.CONTACT_TO || "contact@vroom.fr").split(",").map((s) => s.trim()).filter(Boolean);
+  const from = process.env.CONTACT_FROM || process.env.EMAIL_FROM || "Vroom <no-reply@vroompro.app>";
+  const to = (process.env.CONTACT_TO || "contact@vroompro.app").split(",").map((s) => s.trim()).filter(Boolean);
+  if (to.length === 0)
+    return NextResponse.json({ ok: false, error: "Aucun destinataire configuré." }, { status: 503 });
 
   const text = [
     "Nouveau message depuis le site Vroom",
