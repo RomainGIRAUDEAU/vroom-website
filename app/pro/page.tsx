@@ -1,7 +1,7 @@
 import { IMG } from "@/lib/img";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Duotone from "@/components/Duotone";
+import Visual from "@/components/Visual";
 import PhoneMockup from "@/components/PhoneMockup";
 import {
   IconArrowRight,
@@ -62,7 +62,7 @@ function ProHero() {
           </div>
         </div>
         <div className="relative">
-          <Duotone
+          <Visual
             src={IMG.proHero}
             alt="Mécanicien professionnel en intervention"
             priority
@@ -182,7 +182,7 @@ function Pricing() {
     <section id="offre" className="section-pad scroll-mt-24 border-t border-white/5">
       <div className="container-site grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
         <div className="card relative overflow-hidden p-8 md:p-10">
-          <Duotone
+          <Visual
             src={IMG.mecanicien}
             alt="Mécanicien au travail dans son garage"
             sizes="(max-width: 1024px) 100vw, 33vw"
@@ -264,7 +264,7 @@ function ProCta() {
             <p className="mt-3 text-xs text-zinc-500">Rejoignez +1200 pros déjà partenaires</p>
           </div>
         </div>
-        <Duotone
+        <Visual
           src={IMG.mainsMecano}
           alt="Mains de mécanicien avec une clé sur un moteur"
           sizes="(max-width: 1024px) 100vw, 50vw"

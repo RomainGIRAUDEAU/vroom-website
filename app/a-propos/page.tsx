@@ -1,7 +1,7 @@
 import { IMG } from "@/lib/img";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Duotone from "@/components/Duotone";
+import Visual from "@/components/Visual";
 import {
   IconArrowRight,
   IconBolt,
@@ -41,7 +41,7 @@ function Mission() {
   return (
     <section className="section-pad border-t border-white/5">
       <div className="container-site grid items-center gap-10 lg:grid-cols-2">
-        <Duotone
+        <Visual
           src={IMG.conducteurNuit}
           alt="Automobiliste au volant de nuit"
           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -113,7 +113,7 @@ function RivieraFlow() {
   return (
     <section className="section-pad border-t border-white/5">
       <div className="container-site grid items-center gap-10 rounded-3xl border border-vroom-yellow/25 bg-gradient-to-b from-vroom-card2 to-vroom-card p-8 md:p-12 lg:grid-cols-2">
-        <Duotone
+        <Visual
           src={IMG.equipe}
           alt="L'équipe Riviera Flow au travail"
           sizes="(max-width: 1024px) 100vw, 50vw"

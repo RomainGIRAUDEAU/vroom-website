@@ -1,7 +1,7 @@
 import { IMG } from "@/lib/img";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Duotone from "@/components/Duotone";
+import Visual from "@/components/Visual";
 import {
   IconArrowRight,
   IconBriefcase,
@@ -74,7 +74,7 @@ export default function EntreprisesPage() {
               </Link>
             </div>
           </div>
-          <Duotone
+          <Visual
             src={IMG.moteur}
             alt="Entretien d'un moteur de véhicule professionnel"
             sizes="(max-width: 1024px) 100vw, 50vw"

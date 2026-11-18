@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1050" width="1400" height="1050"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#08080c"/><stop offset="0.55" stop-color="#0d0d13"/><stop offset="1" stop-color="#131318"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101014"/><stop offset="1" stop-color="#050506"/>
+    </linearGradient>
+    <radialGradient id="haloY" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFD60A" stop-opacity="0.95"/><stop offset="0.35" stop-color="#FFD60A" stop-opacity="0.35"/><stop offset="1" stop-color="#FFD60A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="haloW" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.9"/><stop offset="0.4" stop-color="#fff" stop-opacity="0.25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFD60A" stop-opacity="0.55"/><stop offset="1" stop-color="#FFD60A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beamW" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1a20"/><stop offset="1" stop-color="#060608"/>
+    </linearGradient>
+    <filter id="b6" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6"/></filter><filter id="b12" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter><filter id="b20" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="20"/></filter><filter id="b3" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs><rect width="1400" height="1050" fill="url(#sky)"/>
+    <rect width="1400" height="1050" fill="#08080b"/>
+    <ellipse cx="700" cy="651" rx="588" ry="357" fill="#101014"/>
+    <rect x="330" y="430" width="740" height="260" rx="36" fill="#141416"/>
+    <rect x="370" y="400" width="120" height="80" rx="14" fill="#1e1e22"/>
+    <rect x="650" y="380" width="120" height="100" rx="14" fill="#1e1e22"/>
+    <rect x="930" y="400" width="120" height="80" rx="14" fill="#1e1e22"/>
+    <path d="M490,400 C490,340 560,340 560,400" stroke="#1e1e22" stroke-width="26" fill="none"/>
+    <path d="M770,380 C770,310 850,310 850,380" stroke="#1e1e22" stroke-width="26" fill="none"/>
+    <rect x="600" y="520" width="200" height="60" rx="16" fill="#0c0c10" stroke="#26262e" stroke-width="3"/>
+    <circle cx="620" cy="550" r="9" fill="#FFD60A"/><circle cx="660" cy="550" r="9" fill="#3a3a42"/><circle cx="700" cy="550" r="9" fill="#3a3a42"/><circle cx="740" cy="550" r="9" fill="#3a3a42"/>
+    <circle cx="700" cy="300" r="260" fill="url(#haloY)"/>
+    <g transform="translate(560,470) rotate(-24)">
+      <rect x="-16" y="-110" width="32" height="190" rx="14" fill="#1e1e22"/>
+      <path d="M-30,-110 L30,-110 L22,-150 L-22,-150 Z" fill="#1e1e22"/>
+      <circle cx="0" cy="-96" r="26" fill="#08080b"/>
+    </g>
+    <ellipse cx="500" cy="600" rx="52" ry="34" fill="#1e1e22" transform="rotate(-18 500 600)"/>
+    <ellipse cx="880" cy="610" rx="52" ry="34" fill="#1e1e22" transform="rotate(16 880 610)"/>
+    <rect x="452" y="560" width="90" height="26" rx="13" fill="#1e1e22" transform="rotate(-18 500 600)"/>
+    <rect x="838" y="572" width="90" height="26" rx="13" fill="#1e1e22" transform="rotate(16 880 610)"/>
+    <line x1="635" y1="330" x2="585" y2="300" stroke="#FFD60A" stroke-width="4" stroke-linecap="round" opacity="0.5"/><line x1="661" y1="300" x2="631" y2="274" stroke="#FFD60A" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="687" y1="330" x2="677" y2="248" stroke="#FFD60A" stroke-width="4" stroke-linecap="round" opacity="0.9"/><line x1="713" y1="300" x2="723" y2="300" stroke="#FFD60A" stroke-width="4" stroke-linecap="round" opacity="0.5"/><line x1="739" y1="330" x2="769" y2="274" stroke="#FFD60A" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="765" y1="300" x2="815" y2="248" stroke="#FFD60A" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <rect x="0" y="980" width="1400" height="70" fill="#050505" opacity="0.5" filter="url(#b6)"/>
+  </svg>

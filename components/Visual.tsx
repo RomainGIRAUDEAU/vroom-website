@@ -1,17 +1,15 @@
-import Image from "next/image";
 import React from "react";
 
 /**
- * Image "duotone" Vroom : N&B + calque jaune en multiply.
- * Uniformise toutes les photos (jour/nuit, couleurs) dans l'identité noir & jaune du site.
+ * Visuel de section : illustration SVG générée en local (public/images,
+ * scripts/generate-visuals.mjs) — déjà dans la palette noir & jaune Vroom,
+ * aucun traitement d'image requis.
  */
-export default function Duotone({
+export default function Visual({
   src,
   alt,
   className = "",
   imgClassName = "",
-  priority = false,
-  sizes,
   children,
   gradient = "from-black/80 via-black/20 to-black/30",
 }: {
@@ -26,15 +24,12 @@ export default function Duotone({
 }) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={src}
         alt={alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={`duotone-img object-cover ${imgClassName}`}
+        className={`absolute inset-0 h-full w-full object-cover ${imgClassName}`}
       />
-      <div className="absolute inset-0 bg-vroom-yellow mix-blend-multiply" aria-hidden />
       <div className={`absolute inset-0 bg-gradient-to-t ${gradient}`} aria-hidden />
       {children}
     </div>

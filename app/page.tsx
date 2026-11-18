@@ -1,6 +1,6 @@
 import { IMG } from "@/lib/img";
 import Link from "next/link";
-import Duotone from "@/components/Duotone";
+import Visual from "@/components/Visual";
 import FranceMap from "@/components/FranceMap";
 import PhoneMockup from "@/components/PhoneMockup";
 import StoreBadges from "@/components/StoreBadges";
@@ -86,7 +86,7 @@ function Hero() {
             </div>
           </div>
         </div>
-        <Duotone
+        <Visual
           src={IMG.heroHome}
           alt="Voiture sur une route de nuit, feux arrière allumés"
           priority
@@ -97,7 +97,7 @@ function Hero() {
             <p className="text-xs font-bold uppercase tracking-widest text-vroom-yellow">Assistance 7j/7</p>
             <p className="mt-1 text-sm text-zinc-300">Un pro intervient près de chez vous</p>
           </div>
-        </Duotone>
+        </Visual>
       </div>
     </section>
   );
@@ -122,7 +122,7 @@ function DualSolutions() {
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Particuliers */}
           <div className="card group relative flex min-h-[480px] flex-col justify-end overflow-hidden border-vroom-yellow/30 p-8">
-            <Duotone
+            <Visual
               src={IMG.cardParticuliers}
               alt="Rue de ville la nuit"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -146,7 +146,7 @@ function DualSolutions() {
           </div>
           {/* Pros */}
           <div className="card group relative flex min-h-[480px] flex-col justify-end overflow-hidden border-vroom-yellow/30 p-8">
-            <Duotone
+            <Visual
               src={IMG.cardPros}
               alt="Dépanneuse chargeant un véhicule"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -197,7 +197,7 @@ function Why() {
             Vroom est né pour rendre l&apos;assistance automobile plus simple, plus rapide et plus humaine.
           </p>
         </div>
-        <Duotone
+        <Visual
           src={IMG.conducteurNuit}
           alt="Conducteur au volant de nuit, ville en arrière-plan"
           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -374,7 +374,7 @@ function Freedom() {
   return (
     <section className="section-pad border-t border-white/5">
       <div className="container-site grid items-center gap-10 lg:grid-cols-2">
-        <Duotone
+        <Visual
           src={IMG.mainsMecano}
           alt="Mécanicien réparant un moteur"
           sizes="(max-width: 1024px) 100vw, 50vw"

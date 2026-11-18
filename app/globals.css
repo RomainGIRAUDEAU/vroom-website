@@ -78,10 +78,6 @@
   .text-balance {
     text-wrap: balance;
   }
-  /* Duotone Vroom : toute photo devient noir & jaune */
-  .duotone-img {
-    filter: grayscale(1) contrast(1.12) brightness(0.92);
-  }
   /* texture subtile de fond pour les sections hero */
   .bg-grid-glow {
     background-image:
