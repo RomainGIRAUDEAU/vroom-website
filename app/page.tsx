@@ -1,6 +1,6 @@
 import { IMG } from "@/lib/img";
-import Image from "next/image";
 import Link from "next/link";
+import Duotone from "@/components/Duotone";
 import FranceMap from "@/components/FranceMap";
 import PhoneMockup from "@/components/PhoneMockup";
 import StoreBadges from "@/components/StoreBadges";
@@ -34,8 +34,15 @@ import {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="container-site grid items-center gap-10 pb-16 pt-14 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-24">
+    <section className="bg-grid-glow relative overflow-hidden">
+      {/* filigrane V */}
+      <span
+        aria-hidden
+        className="neon-v pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 select-none text-[26rem] font-extrabold leading-none text-vroom-yellow/10 lg:block"
+      >
+        V
+      </span>
+      <div className="container-site relative grid items-center gap-10 pb-16 pt-14 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-24">
         <div>
           <h1 className="h2 text-balance !text-4xl md:!text-6xl">
             Reprenez
@@ -79,21 +86,18 @@ function Hero() {
             </div>
           </div>
         </div>
-        <div className="relative h-[320px] overflow-hidden rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[440px]">
-          <Image
-            src={IMG.heroHome}
-            alt="Voiture sur une route de nuit, feux arrière allumés"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-vroom-black/80 via-transparent to-vroom-black/30" />
+        <Duotone
+          src={IMG.heroHome}
+          alt="Voiture sur une route de nuit, feux arrière allumés"
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="h-[320px] rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[440px]"
+        >
           <div className="absolute bottom-5 left-5 rounded-xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-md">
             <p className="text-xs font-bold uppercase tracking-widest text-vroom-yellow">Assistance 7j/7</p>
             <p className="mt-1 text-sm text-zinc-300">Un pro intervient près de chez vous</p>
           </div>
-        </div>
+        </Duotone>
       </div>
     </section>
   );
@@ -118,14 +122,14 @@ function DualSolutions() {
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Particuliers */}
           <div className="card group relative flex min-h-[480px] flex-col justify-end overflow-hidden border-vroom-yellow/30 p-8">
-            <Image
+            <Duotone
               src={IMG.cardParticuliers}
               alt="Rue de ville la nuit"
-              fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+              className="absolute inset-0"
+              imgClassName="opacity-60 transition-transform duration-700 group-hover:scale-105"
+              gradient="from-black via-black/50 to-black/20"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
             <div className="relative">
               <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-vroom-yellow/50 bg-black/50 text-vroom-yellow backdrop-blur">
                 <IconUser className="h-6 w-6" />
@@ -142,14 +146,14 @@ function DualSolutions() {
           </div>
           {/* Pros */}
           <div className="card group relative flex min-h-[480px] flex-col justify-end overflow-hidden border-vroom-yellow/30 p-8">
-            <Image
+            <Duotone
               src={IMG.cardPros}
               alt="Dépanneuse chargeant un véhicule"
-              fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+              className="absolute inset-0"
+              imgClassName="opacity-60 transition-transform duration-700 group-hover:scale-105"
+              gradient="from-black via-black/50 to-black/20"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
             <div className="relative">
               <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-vroom-yellow/50 bg-black/50 text-vroom-yellow backdrop-blur">
                 <IconWrench className="h-6 w-6" />
@@ -193,16 +197,13 @@ function Why() {
             Vroom est né pour rendre l&apos;assistance automobile plus simple, plus rapide et plus humaine.
           </p>
         </div>
-        <div className="relative h-[300px] overflow-hidden rounded-3xl border border-white/10 md:h-[380px]">
-          <Image
-            src={IMG.conducteurNuit}
-            alt="Conducteur au volant de nuit, ville en arrière-plan"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-vroom-black/70 to-transparent" />
-        </div>
+        <Duotone
+          src={IMG.conducteurNuit}
+          alt="Conducteur au volant de nuit, ville en arrière-plan"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="h-[300px] rounded-3xl border border-white/10 md:h-[380px]"
+          gradient="from-vroom-black/70 to-transparent"
+        />
       </div>
     </section>
   );
@@ -373,16 +374,13 @@ function Freedom() {
   return (
     <section className="section-pad border-t border-white/5">
       <div className="container-site grid items-center gap-10 lg:grid-cols-2">
-        <div className="relative order-2 h-[280px] overflow-hidden rounded-3xl border border-white/10 md:h-[360px] lg:order-1">
-          <Image
-            src={IMG.mainsMecano}
-            alt="Mécanicien réparant un moteur"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-vroom-black/60 to-transparent" />
-        </div>
+        <Duotone
+          src={IMG.mainsMecano}
+          alt="Mécanicien réparant un moteur"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="order-2 h-[280px] rounded-3xl border border-white/10 md:h-[360px] lg:order-1"
+          gradient="from-vroom-black/60 to-transparent"
+        />
         <div className="order-1 lg:order-2">
           <span className="badge-label">La liberté de rouler</span>
           <h2 className="h2 mt-5 text-balance">

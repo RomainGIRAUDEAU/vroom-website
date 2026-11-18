@@ -36,7 +36,7 @@ export default function ContactForm() {
       if (!res.ok || !data.ok) throw new Error(data.error || "Erreur inconnue");
       setSent(true);
     } catch {
-      setError("Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous directement à contact@vroom.fr.");
+      setError("Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous directement à support@vroompro.app.");
     } finally {
       setLoading(false);
     }

@@ -84,7 +84,8 @@ export async function POST(req: Request) {
         html,
         tags: [
           { name: "source", value: "vroom-website" },
-          { name: "form_subject", value: subject.slice(0, 60) },
+          // Resend n'accepte que [A-Za-z0-9_-] dans les tags
+          { name: "form_subject", value: subject.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 40) || "contact" },
         ],
       }),
     });

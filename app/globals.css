@@ -78,6 +78,17 @@
   .text-balance {
     text-wrap: balance;
   }
+  /* Duotone Vroom : toute photo devient noir & jaune */
+  .duotone-img {
+    filter: grayscale(1) contrast(1.12) brightness(0.92);
+  }
+  /* texture subtile de fond pour les sections hero */
+  .bg-grid-glow {
+    background-image:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255, 214, 10, 0.07), transparent 70%),
+      radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: auto, 28px 28px;
+  }
   .mask-fade-x {
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }

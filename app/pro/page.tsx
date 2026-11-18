@@ -1,7 +1,7 @@
 import { IMG } from "@/lib/img";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Duotone from "@/components/Duotone";
 import PhoneMockup from "@/components/PhoneMockup";
 import {
   IconArrowRight,
@@ -62,17 +62,14 @@ function ProHero() {
           </div>
         </div>
         <div className="relative">
-          <div className="relative h-[380px] overflow-hidden rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[460px]">
-            <Image
-              src={IMG.proHero}
-              alt="Mécanicien professionnel en intervention"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-          </div>
+          <Duotone
+            src={IMG.proHero}
+            alt="Mécanicien professionnel en intervention"
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="h-[380px] rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[460px]"
+            gradient="from-black/70 via-transparent to-transparent"
+          />
           {/* témoignage */}
           <div className="card absolute -bottom-6 left-4 right-4 border-vroom-yellow/30 bg-black/80 p-5 backdrop-blur-md md:left-8 md:right-auto md:w-[340px]">
             <p className="text-sm leading-relaxed text-zinc-200">
@@ -185,14 +182,14 @@ function Pricing() {
     <section id="offre" className="section-pad scroll-mt-24 border-t border-white/5">
       <div className="container-site grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
         <div className="card relative overflow-hidden p-8 md:p-10">
-          <Image
+          <Duotone
             src={IMG.mecanicien}
             alt="Mécanicien au travail dans son garage"
-            fill
             sizes="(max-width: 1024px) 100vw, 33vw"
-            className="object-cover opacity-40"
+            className="absolute inset-0"
+            imgClassName="opacity-40"
+            gradient="from-black/80 to-black/30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/30" />
           <div className="relative">
             <h3 className="text-3xl font-extrabold">
               Statut
@@ -267,16 +264,13 @@ function ProCta() {
             <p className="mt-3 text-xs text-zinc-500">Rejoignez +1200 pros déjà partenaires</p>
           </div>
         </div>
-        <div className="relative h-[280px] lg:h-full lg:min-h-[420px]">
-          <Image
-            src={IMG.mainsMecano}
-            alt="Mains de mécanicien avec une clé sur un moteur"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-vroom-card/60 lg:bg-gradient-to-r lg:from-vroom-card lg:via-transparent lg:to-transparent" />
-        </div>
+        <Duotone
+          src={IMG.mainsMecano}
+          alt="Mains de mécanicien avec une clé sur un moteur"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="relative h-[280px] lg:h-full lg:min-h-[420px]"
+          gradient="from-transparent to-vroom-card/60 lg:from-vroom-card lg:via-transparent lg:to-transparent"
+        />
       </div>
     </section>
   );

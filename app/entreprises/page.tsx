@@ -1,7 +1,7 @@
 import { IMG } from "@/lib/img";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Duotone from "@/components/Duotone";
 import {
   IconArrowRight,
   IconBriefcase,
@@ -74,16 +74,12 @@ export default function EntreprisesPage() {
               </Link>
             </div>
           </div>
-          <div className="relative h-[300px] overflow-hidden rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[400px]">
-            <Image
-              src={IMG.moteur}
-              alt="Entretien d'un moteur de véhicule professionnel"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-vroom-black/80 via-transparent to-vroom-black/30" />
-          </div>
+          <Duotone
+            src={IMG.moteur}
+            alt="Entretien d'un moteur de véhicule professionnel"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="h-[300px] rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[400px]"
+          />
         </div>
       </section>
 
