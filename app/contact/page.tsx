@@ -83,7 +83,7 @@ function ContactHero() {
 
 const CONTACTS = [
   { icon: IconPhone, title: "Téléphone", lines: ["04 11 93 00 00", "Lun - Dim : 7h - 22h"] },
-  { icon: IconMail, title: "Email", lines: ["support@vroompro.app", "Réponse sous 24h"] },
+  { icon: IconMail, title: "Email", lines: ["contact@vroompro.app", "Réponse sous 24h"] },
   { icon: IconChat, title: "Chat en direct", lines: ["Disponible dans l'app", "7j/7 - 7h à 22h"] },
   { icon: IconPin, title: "Adresse", lines: ["Vroom SAS", "123 Avenue de la Liberté", "30900 Nîmes, France"] },
 ];

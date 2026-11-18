@@ -12,7 +12,7 @@ const SUBJECTS = [
 ];
 
 const FALLBACK_ERROR =
-  "Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous directement à support@vroompro.app.";
+  "Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous directement à contact@vroompro.app.";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
