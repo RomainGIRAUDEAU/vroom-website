@@ -11,6 +11,9 @@ const SUBJECTS = [
   "Autre",
 ];
 
+const FALLBACK_ERROR =
+  "Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous directement à support@vroompro.app.";
+
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,10 +36,16 @@ export default function ContactForm() {
         body: JSON.stringify(form),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) throw new Error(data.error || "Erreur inconnue");
-      setSent(true);
+      if (res.ok && data.ok) {
+        setSent(true);
+      } else if (res.status === 400 && data.error) {
+        // erreur de saisie : on affiche la raison exacte renvoyée par le serveur
+        setError(data.error);
+      } else {
+        setError(FALLBACK_ERROR);
+      }
     } catch {
-      setError("Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous directement à support@vroompro.app.");
+      setError(FALLBACK_ERROR);
     } finally {
       setLoading(false);
     }
@@ -62,15 +71,15 @@ export default function ContactForm() {
   return (
     <form className="card space-y-3 p-6 md:p-7" onSubmit={onSubmit}>
       <div className="grid gap-3 sm:grid-cols-2">
-        <input required type="text" placeholder="Nom complet" className="input-dark" value={form.name} onChange={set("name")} />
-        <input required type="email" placeholder="Email" className="input-dark" value={form.email} onChange={set("email")} />
+        <input required minLength={2} maxLength={100} type="text" placeholder="Nom complet" className="input-dark" value={form.name} onChange={set("name")} />
+        <input required maxLength={200} type="email" placeholder="Email" className="input-dark" value={form.email} onChange={set("email")} />
       </div>
-      <input type="tel" placeholder="Téléphone (optionnel)" className="input-dark" value={form.phone} onChange={set("phone")} />
+      <input type="tel" maxLength={30} placeholder="Téléphone (optionnel)" className="input-dark" value={form.phone} onChange={set("phone")} />
       <select className="input-dark appearance-none" required value={form.subject} onChange={set("subject")}>
         <option value="" disabled>Sujet</option>
         {SUBJECTS.map((s) => <option key={s}>{s}</option>)}
       </select>
-      <textarea required rows={5} placeholder="Votre message" className="input-dark resize-none" value={form.message} onChange={set("message")} />
+      <textarea required minLength={2} maxLength={5000} rows={5} placeholder="Votre message" className="input-dark resize-none" value={form.message} onChange={set("message")} />
       <label className="flex cursor-pointer items-start gap-2.5 text-xs text-zinc-400">
         <input
           type="checkbox"

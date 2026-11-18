@@ -21,15 +21,15 @@ export async function POST(req: Request) {
   const message = String(body.message ?? "").trim();
 
   if (name.length < 2 || name.length > 100)
-    return NextResponse.json({ ok: false, error: "Nom invalide." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Indiquez votre nom (2 caractères minimum)." }, { status: 400 });
   if (!EMAIL_RE.test(email) || email.length > 200)
     return NextResponse.json({ ok: false, error: "Adresse email invalide." }, { status: 400 });
   if (phone.length > 30)
     return NextResponse.json({ ok: false, error: "Téléphone invalide." }, { status: 400 });
   if (subject.length < 2 || subject.length > 150)
-    return NextResponse.json({ ok: false, error: "Sujet invalide." }, { status: 400 });
-  if (message.length < 5 || message.length > 5000)
-    return NextResponse.json({ ok: false, error: "Message invalide (5 à 5000 caractères)." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Choisissez un sujet." }, { status: 400 });
+  if (message.length < 2 || message.length > 5000)
+    return NextResponse.json({ ok: false, error: "Votre message est vide ou trop long (5000 caractères max)." }, { status: 400 });
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey)
