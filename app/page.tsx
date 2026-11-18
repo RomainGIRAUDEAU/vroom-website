@@ -5,6 +5,7 @@ import Visual from "@/components/Visual";
 import HeroPhoto from "@/components/HeroPhoto";
 import PhoneMockup from "@/components/PhoneMockup";
 import StoreBadges from "@/components/StoreBadges";
+import Faq from "@/components/Faq";
 import {
   IconArrowRight,
   IconBattery,
@@ -14,7 +15,6 @@ import {
   IconCar,
   IconCard,
   IconClipboard,
-  IconClock,
   IconEuro,
   IconFuel,
   IconGauge,
@@ -27,7 +27,6 @@ import {
   IconTire,
   IconTow,
   IconUser,
-  IconUserPlus,
   IconUsers,
   IconWrench,
 } from "@/components/Icons";
@@ -44,24 +43,30 @@ function Hero() {
       />
       <div className="container-site relative -mt-16 pb-16 lg:mt-0 lg:flex lg:min-h-[640px] lg:items-center lg:pb-10 lg:pt-24">
         <div className="max-w-xl">
-          <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight md:text-7xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-vroom-yellow/40 bg-black/50 px-3 py-1 text-xs font-semibold text-vroom-yellow backdrop-blur">
+            <IconPin className="h-3.5 w-3.5" />
+            L&apos;appli de dépannage auto · Nîmes &amp; Alès
+          </span>
+          <h1 className="mt-5 text-5xl font-extrabold leading-[1.05] tracking-tight md:text-7xl">
             Reprenez
             <br />
             <span className="text-vroom-yellow">le contrôle.</span>
           </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-300 md:text-lg">
-            Une panne, une batterie déchargée, un pneu crevé ou un simple besoin d&apos;entretien.
-            <br />
-            Vroom vous connecte rapidement à un professionnel proche de vous.
+          <p className="mt-6 max-w-md text-lg font-semibold leading-snug text-white md:text-xl">
+            Un dépanneur ou un mécanicien vérifié, près de vous, au prix annoncé.
+          </p>
+          <p className="mt-3 max-w-md text-base leading-relaxed text-zinc-300">
+            Batterie à plat, crevaison, panne, remorquage ou entretien : décrivez votre problème dans
+            l&apos;application, les pros autour de vous vous envoient leur devis, vous choisissez.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="#services" className="btn-yellow">
-              Découvrir Vroom
-              <IconArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="#telecharger" className="btn-outline">
+            <Link href="#telecharger" className="btn-yellow">
               <IconPhone className="h-4 w-4" />
               Télécharger l&apos;application
+            </Link>
+            <Link href="#comment-ca-marche" className="btn-outline">
+              Comment ça marche ?
+              <IconArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="mt-9 flex items-center gap-4">
@@ -150,28 +155,26 @@ function DualSolutions() {
           src={IMG.carteParticuliers}
           alt="Automobiliste au téléphone à côté de sa voiture en panne, capot ouvert"
           icon={IconUser}
-          title="Particuliers"
-          subtitle="Besoin d’aide maintenant ?"
-          text={<>Assistance rapide, transparente et proche de vous.</>}
-          cta="Trouver une solution"
-          href="#telecharger"
+          title="Automobilistes"
+          subtitle="En panne ou besoin d’un entretien ?"
+          text={<>Trouvez un pro vérifié près de vous, comparez les devis, payez dans l&apos;app.</>}
+          cta="Voir comment ça marche"
+          href="#comment-ca-marche"
         />
         <div className="relative order-first py-4 text-center lg:order-none lg:w-[240px]">
           <span aria-hidden className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-vroom-yellow/30 to-transparent lg:block" />
           <div className="relative bg-vroom-black py-6">
             <span className="neon-v text-7xl font-extrabold leading-none text-vroom-yellow md:text-8xl">V</span>
             <h2 className="mt-6 text-3xl font-bold leading-tight">
-              Deux solutions,
+              Une appli,
               <br />
-              un même
-              <br />
-              <span className="text-vroom-yellow">engagement.</span>
+              deux <span className="text-vroom-yellow">usages.</span>
             </h2>
             <div className="mx-auto mt-6 h-[2px] w-14 bg-vroom-yellow" />
             <p className="mt-6 text-lg text-zinc-400">
-              L&apos;assistance auto
+              Vous êtes
               <br />
-              nouvelle génération.
+              automobiliste ou pro ?
             </p>
           </div>
         </div>
@@ -181,13 +184,14 @@ function DualSolutions() {
           icon={IconWrench}
           title={
             <>
-              Mécaniciens /
+              Mécaniciens &amp;
               <br />
-              Remorqueurs partenaires
+              dépanneurs
             </>
           }
-          text={<>Travaillez librement et développez votre activité.</>}
-          cta="Rejoindre Vroom Pro"
+          subtitle="Envie de nouveaux clients ?"
+          text={<>Recevez des demandes près de chez vous et envoyez vos devis avec Vroom Pro.</>}
+          cta="Découvrir Vroom Pro"
           href="/pro"
         />
       </div>
@@ -230,105 +234,33 @@ function Why() {
 
 /* --------------------------- DEUX COMMUNAUTÉS ------------------------------ */
 
-function Communities() {
-  const particulier = [
-    { icon: IconBattery, label: "Batterie" },
-    { icon: IconFuel, label: "Carburant" },
-    { icon: IconTire, label: "Crevaison" },
-    { icon: IconTow, label: "Remorquage" },
-    { icon: IconGauge, label: "Diagnostic" },
-  ];
-  const pro = [
-    { icon: IconWrench, label: "Mécaniciens" },
-    { icon: IconCar, label: "Garages mobiles" },
-    { icon: IconClock, label: "Dépanneurs" },
-    { icon: IconTow, label: "Remorqueurs" },
-  ];
-  return (
-    <section className="py-10 md:py-14">
-      <div className="container-site">
-        <div className="rounded-3xl border border-white/10 bg-vroom-card/60 p-6 md:p-10">
-          <h2 className="h2 text-center">Une plateforme. Deux communautés.</h2>
-          <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1fr_auto_1fr]">
-            <div className="card flex flex-col p-7">
-              <div className="flex items-start gap-4">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-vroom-yellow text-black">
-                  <IconUser className="h-7 w-7" />
-                </span>
-                <div>
-                  <h3 className="text-xl font-extrabold">Particuliers</h3>
-                  <p className="mt-1 text-sm text-zinc-400">Trouvez rapidement un professionnel proche de vous.</p>
-                </div>
-              </div>
-              <div className="mt-6 grid flex-1 grid-cols-2 content-start gap-x-6 gap-y-3">
-                {particulier.map((s) => (
-                  <span key={s.label} className="flex items-center gap-2.5 text-sm text-zinc-300">
-                    <s.icon className="h-4 w-4 text-vroom-yellow" />
-                    {s.label}
-                  </span>
-                ))}
-              </div>
-              <Link href="#telecharger" className="btn-yellow mt-7 w-full">
-                Je suis un particulier
-                <IconArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="relative hidden items-center lg:flex">
-              <span aria-hidden className="absolute inset-x-[-1.5rem] top-1/2 border-t border-dashed border-vroom-yellow/50" />
-              <span className="relative flex h-24 w-24 items-center justify-center rounded-full border border-vroom-yellow/60 bg-vroom-black text-5xl font-extrabold text-vroom-yellow shadow-yellow-glow">
-                <span className="neon-v">V</span>
-              </span>
-            </div>
-            <div className="card flex flex-col p-7">
-              <div className="flex items-start gap-4">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-vroom-yellow text-black">
-                  <IconWrench className="h-7 w-7" />
-                </span>
-                <div>
-                  <h3 className="text-xl font-extrabold">Professionnels</h3>
-                  <p className="mt-1 text-sm text-zinc-400">Développez votre activité librement.</p>
-                </div>
-              </div>
-              <div className="mt-6 grid flex-1 content-start gap-y-3">
-                {pro.map((s) => (
-                  <span key={s.label} className="flex items-center gap-2.5 text-sm text-zinc-300">
-                    <s.icon className="h-4 w-4 text-vroom-yellow" />
-                    {s.label}
-                  </span>
-                ))}
-              </div>
-              <Link href="/pro" className="btn-yellow mt-7 w-full">
-                Je suis un professionnel
-                <IconArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ---------------------------- COMMENT ÇA MARCHE ---------------------------- */
 
 const STEPS = [
   {
     n: "1",
-    icon: IconCar,
-    title: "Décrivez votre besoin",
-    text: "Indiquez votre problème en quelques clics.",
+    icon: IconPhone,
+    title: "Décrivez votre problème",
+    text: "Quelques questions guidées dans l'app pour identifier la panne. Votre position est ajoutée automatiquement.",
   },
   {
     n: "2",
-    icon: IconUserPlus,
-    title: "Un professionnel proche accepte",
-    text: "Nous trouvons le meilleur pro proche de vous.",
+    icon: IconEuro,
+    title: "Recevez des devis",
+    text: "Les pros vérifiés autour de vous proposent leur prix. Vous comparez notes et tarifs.",
   },
   {
     n: "3",
-    icon: IconTow,
+    icon: IconCard,
+    title: "Choisissez et payez dans l'app",
+    text: "Paiement sécurisé par carte. Vous suivez l'arrivée du pro en temps réel et pouvez lui écrire.",
+  },
+  {
+    n: "4",
+    icon: IconCar,
     title: "Vous reprenez la route",
-    text: "Intervention rapide, en toute sérénité.",
+    text: "Le pro intervient, vous le notez. Le prix payé est celui du devis accepté.",
   },
 ];
 
@@ -336,8 +268,9 @@ function HowItWorks() {
   return (
     <section id="comment-ca-marche" className="scroll-mt-24 py-10 md:py-14">
       <div className="container-site">
-        <h2 className="h2 text-center">Comment ça fonctionne ?</h2>
-        <div className="mt-8 grid gap-8 rounded-3xl border border-white/10 bg-vroom-card/60 p-7 md:grid-cols-3 md:gap-4 md:p-10">
+        <h2 className="h2 text-center">Comment ça marche ?</h2>
+        <p className="lead mx-auto mt-3 max-w-xl text-center">De la panne à l&apos;intervention, tout se passe dans l&apos;application.</p>
+        <div className="mt-8 grid gap-8 rounded-3xl border border-white/10 bg-vroom-card/60 p-7 sm:grid-cols-2 md:p-10 lg:grid-cols-4 lg:gap-4">
           {STEPS.map((s, i) => (
             <div key={s.n} className="relative flex items-start gap-4">
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/10 bg-vroom-card2 text-vroom-yellow">
@@ -351,7 +284,7 @@ function HowItWorks() {
                 <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{s.text}</p>
               </div>
               {i < STEPS.length - 1 && (
-                <span aria-hidden className="absolute right-[-1.25rem] top-7 hidden w-10 items-center text-vroom-yellow md:flex">
+                <span aria-hidden className="absolute right-[-1.1rem] top-7 hidden w-8 items-center text-vroom-yellow lg:flex">
                   <span className="flex-1 border-t border-dotted border-zinc-400" />
                   <IconArrowRight className="h-3.5 w-3.5 text-zinc-300" />
                 </span>
@@ -367,18 +300,18 @@ function HowItWorks() {
 /* ------------------------------ DIFFÉRENCIANTS ----------------------------- */
 
 const VALUES = [
-  { icon: IconBolt, title: "Rapidité", text: "Des professionnels proches pour une intervention rapide." },
-  { icon: IconEuro, title: "Transparence", text: "Des prix clairs et connus à l'avance. Pas de surprise." },
-  { icon: IconShield, title: "Confiance", text: "Des professionnels vérifiés et notés par la communauté." },
-  { icon: IconPin, title: "Liberté", text: "Vous choisissez le professionnel et la solution qui vous conviennent." },
-  { icon: IconWrench, title: "Simplicité", text: "Tout se fait depuis l'application, en quelques clics." },
+  { icon: IconBolt, title: "Rapidité", text: "Votre demande part immédiatement aux pros disponibles autour de vous." },
+  { icon: IconEuro, title: "Transparence", text: "Le prix est dans le devis. Vous l'acceptez avant l'intervention." },
+  { icon: IconShield, title: "Confiance", text: "Des pros validés par l'équipe Vroom et notés par les clients." },
+  { icon: IconPin, title: "Liberté", text: "Vous choisissez le pro et le devis qui vous conviennent." },
+  { icon: IconWrench, title: "Simplicité", text: "Demande, paiement, suivi, messages : tout est dans l'app." },
 ];
 
 function Differentiators() {
   return (
     <section className="section-pad">
       <div className="container-site">
-        <h2 className="h2 text-center">Ce qui rend Vroom différent</h2>
+        <h2 className="h2 text-center">Pourquoi choisir Vroom ?</h2>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {VALUES.map((v) => (
             <div key={v.title} className="card-hover p-6 text-center">
@@ -437,36 +370,34 @@ function Freedom() {
 /* -------------------------------- SERVICES --------------------------------- */
 
 const SERVICES = [
-  { icon: IconBattery, label: "Batterie" },
-  { icon: IconTire, label: "Crevaison" },
-  { icon: IconFuel, label: "Carburant" },
-  { icon: IconGauge, label: "Diagnostic" },
-  { icon: IconKey, label: "Ouverture véhicule" },
-  { icon: IconTow, label: "Remorquage" },
-  { icon: IconWrench, label: "Entretien à domicile" },
-  { icon: IconClipboard, label: "Contrôle avant départ" },
+  { icon: IconBattery, label: "Batterie", text: "Démarrage, remplacement" },
+  { icon: IconTire, label: "Crevaison", text: "Réparation, roue de secours" },
+  { icon: IconFuel, label: "Carburant", text: "Panne sèche, erreur de carburant" },
+  { icon: IconGauge, label: "Diagnostic", text: "Voyant allumé, bruit suspect" },
+  { icon: IconKey, label: "Ouverture véhicule", text: "Clés perdues ou enfermées" },
+  { icon: IconTow, label: "Remorquage", text: "Jusqu'au garage de votre choix" },
+  { icon: IconWrench, label: "Entretien à domicile", text: "Vidange, freins, révision" },
+  { icon: IconClipboard, label: "Contrôle avant départ", text: "Avant un long trajet" },
 ];
 
 function Services() {
   return (
     <section id="services" className="section-pad scroll-mt-24 border-t border-white/5">
       <div className="container-site">
-        <h2 className="h2 text-center">Nos services</h2>
+        <h2 className="h2 text-center">Pour quoi faire appel à Vroom ?</h2>
+        <p className="lead mx-auto mt-3 max-w-xl text-center">En urgence sur le bord de la route, ou sur rendez-vous chez vous.</p>
         <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
           {SERVICES.map((s) => (
             <div key={s.label} className="card-hover flex flex-col items-center gap-3 p-6 text-center">
               <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-vroom-yellow/10 text-vroom-yellow">
                 <s.icon className="h-6 w-6" />
               </span>
-              <span className="text-sm font-bold">{s.label}</span>
+              <span>
+                <span className="block text-sm font-bold">{s.label}</span>
+                <span className="mt-1 block text-xs text-zinc-400">{s.text}</span>
+              </span>
             </div>
           ))}
-        </div>
-        <div className="mt-8 text-center">
-          <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-bold text-vroom-yellow transition-colors hover:text-yellow-300">
-            Voir tous les services
-            <IconArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </div>
     </section>
@@ -487,13 +418,15 @@ function Roadmap() {
             gradient="from-[#07090c] via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#07090c] lg:via-transparent"
           />
           <div className="relative p-8 md:p-12 lg:max-w-[50%]">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">Où va Vroom ?</span>
-            <h2 className="h2 mt-4 text-balance">Construire le futur de l&apos;assistance automobile.</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">Où est disponible Vroom ?</span>
+            <h2 className="h2 mt-4 text-balance">Nîmes et Alès aujourd&apos;hui. Toute la France demain.</h2>
             <p className="lead mt-6">
-              Nous construisons un réseau national de professionnels capables d&apos;intervenir rapidement partout en France.
+              Vroom fonctionne à <strong className="font-semibold text-white">Nîmes</strong>,{" "}
+              <strong className="font-semibold text-white">Alès</strong> et dans un rayon d&apos;environ 25 km autour.
+              L&apos;application vous indique tout de suite si votre position est couverte.
             </p>
             <p className="lead mt-4">
-              Notre objectif est simple : rendre l&apos;assistance automobile aussi accessible qu&apos;une course VTC.
+              Notre objectif : rendre l&apos;assistance automobile aussi simple qu&apos;une course VTC, partout en France.
             </p>
           </div>
         </div>
@@ -502,30 +435,29 @@ function Roadmap() {
   );
 }
 
-/* ----------------------------------- CTA ----------------------------------- */
+/* ----------------------------------- FAQ ----------------------------------- */
 
-function FinalCta() {
+function HomeFaq() {
   return (
-    <section className="section-pad">
-      <div className="container-site">
-      <div className="rounded-3xl border border-white/10 bg-vroom-card/60 p-10 text-center md:p-14">
-        <h2 className="h2 text-balance">Besoin d&apos;aide ou envie de rejoindre l&apos;aventure ?</h2>
-        <p className="lead mt-4">Vroom est là pour vous.</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="#telecharger" className="btn-yellow">
-            Trouver une solution
-            <IconArrowRight className="h-4 w-4" />
-          </Link>
-          <Link href="/pro" className="btn-outline">
-            Rejoindre Vroom Pro
+    <section id="faq" className="scroll-mt-24 py-10 md:py-14">
+      <div className="container-site grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">Questions fréquentes</span>
+          <h2 className="h2 mt-4 text-balance">Tout ce qu&apos;il faut savoir avant votre première demande.</h2>
+          <p className="lead mt-5">Une autre question ? Notre équipe vous répond.</p>
+          <Link href="/contact" className="btn-outline mt-6">
+            Nous contacter
             <IconArrowRight className="h-4 w-4" />
           </Link>
         </div>
-      </div>
+        <Faq />
       </div>
     </section>
   );
 }
+
+/* ----------------------------------- CTA ----------------------------------- */
+
 
 /* ------------------------------ TÉLÉCHARGER ------------------------------- */
 
@@ -537,12 +469,19 @@ function Download() {
         <div>
           <span className="badge-label">L&apos;application</span>
           <h2 className="h2 mt-5 text-balance">
-            Besoin d&apos;une assistance <span className="text-vroom-yellow">immédiate ?</span>
+            Téléchargez Vroom <span className="text-vroom-yellow">avant la panne.</span>
           </h2>
           <p className="lead mt-5 max-w-lg">
-            Ouvrez l&apos;application Vroom et trouvez un professionnel disponible en quelques clics.
+            Créez votre compte et ajoutez votre véhicule en 2 minutes : le jour où vous en avez besoin,
+            votre demande part en quelques clics.
           </p>
           <StoreBadges className="mt-7" />
+          <p className="mt-6 text-sm text-zinc-400">
+            Vous êtes mécanicien ou dépanneur ?{" "}
+            <Link href="/pro" className="font-semibold text-vroom-yellow hover:underline">
+              Découvrez Vroom Pro →
+            </Link>
+          </p>
         </div>
         <PhoneMockup className="hidden justify-self-center lg:block" />
       </div>
@@ -557,15 +496,14 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Why />
       <DualSolutions />
-      <Communities />
       <HowItWorks />
+      <Services />
+      <Why />
       <Differentiators />
       <Freedom />
-      <Services />
       <Roadmap />
-      <FinalCta />
+      <HomeFaq />
       <Download />
     </>
   );

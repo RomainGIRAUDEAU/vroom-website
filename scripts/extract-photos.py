@@ -7,10 +7,16 @@ Pour chaque visuel : découpe -> effacement (inpainting) des éléments d'UI
 incrustés dans la maquette (cartes, boutons, textes) -> upscale x2 ->
 léger renforcement de netteté -> JPEG dans public/images/photos/.
 
-Usage (Pillow + numpy + opencv-python-headless) :
-    python3 scripts/extract-photos.py
+Upscale : Real-ESRGAN x4 (via spandrel + torch CPU) si le modèle est fourni,
+sinon Lanczos x2.
+
+Usage :
+    pip install opencv-python-headless numpy torch spandrel
+    # modèle : https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth
+    REALESRGAN_MODEL=/chemin/RealESRGAN_x4plus.pth python3 scripts/extract-photos.py
 """
 
+import os
 from pathlib import Path
 
 import cv2
@@ -85,6 +91,44 @@ def text_mask(region: np.ndarray) -> np.ndarray:
     return cv2.dilate(m, np.ones((5, 5), np.uint8), iterations=2)
 
 
+_MODEL = []
+
+
+def load_model():
+    """Charge Real-ESRGAN une seule fois (None si non configuré)."""
+    if not _MODEL:
+        path = os.environ.get("REALESRGAN_MODEL")
+        if path and Path(path).exists():
+            import torch
+            from spandrel import ModelLoader
+
+            torch.set_num_threads(os.cpu_count() or 4)
+            _MODEL.append(ModelLoader().load_from_file(path).eval())
+        else:
+            _MODEL.append(None)
+    return _MODEL[0]
+
+
+def esrgan(model, bgr: np.ndarray, tile: int = 256, pad: int = 16) -> np.ndarray:
+    """Super-résolution x4 par tuiles (mémoire CPU maîtrisée)."""
+    import torch
+
+    rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB).astype(np.float32) / 255
+    h, w = rgb.shape[:2]
+    out = np.zeros((h * 4, w * 4, 3), np.float32)
+    with torch.inference_mode():
+        for y in range(0, h, tile):
+            for x in range(0, w, tile):
+                y0, x0 = max(y - pad, 0), max(x - pad, 0)
+                y1, x1 = min(y + tile + pad, h), min(x + tile + pad, w)
+                t = torch.from_numpy(rgb[y0:y1, x0:x1]).permute(2, 0, 1)[None]
+                r = model(t)[0].permute(1, 2, 0).clamp(0, 1).numpy()
+                ty, tx = (y - y0) * 4, (x - x0) * 4
+                th, tw = min(tile, h - y) * 4, min(tile, w - x) * 4
+                out[y * 4 : y * 4 + th, x * 4 : x * 4 + tw] = r[ty : ty + th, tx : tx + tw]
+    return cv2.cvtColor((out * 255).round().astype(np.uint8), cv2.COLOR_RGB2BGR)
+
+
 def process(name, spec):
     file, (x0, y0, x1, y1), erase, scale = spec
     img = cv2.imread(str(SRC / file))
@@ -106,14 +150,21 @@ def process(name, spec):
         crop = (crop * (1 - soft) + blurred * soft).astype(np.uint8)
 
     h, w = crop.shape[:2]
-    up = cv2.resize(crop, (w * scale, h * scale), interpolation=cv2.INTER_LANCZOS4)
-    # unsharp mask léger
-    blur = cv2.GaussianBlur(up, (0, 0), 1.2)
-    up = cv2.addWeighted(up, 1.35, blur, -0.35, 0)
+    model = load_model()
+    if model is not None:
+        up = esrgan(model, crop)
+        # x4 -> on plafonne à ~1800 px de large (poids de page raisonnable)
+        target_w = min(w * 4, 1800)
+        if up.shape[1] != target_w:
+            up = cv2.resize(up, (target_w, round(h * target_w / w)), interpolation=cv2.INTER_AREA)
+    else:
+        up = cv2.resize(crop, (w * scale, h * scale), interpolation=cv2.INTER_LANCZOS4)
+        blur = cv2.GaussianBlur(up, (0, 0), 1.2)
+        up = cv2.addWeighted(up, 1.35, blur, -0.35, 0)
 
     OUT.mkdir(parents=True, exist_ok=True)
     out = OUT / f"{name}.jpg"
-    cv2.imwrite(str(out), up, [cv2.IMWRITE_JPEG_QUALITY, 86, cv2.IMWRITE_JPEG_PROGRESSIVE, 1])
+    cv2.imwrite(str(out), up, [cv2.IMWRITE_JPEG_QUALITY, 84, cv2.IMWRITE_JPEG_PROGRESSIVE, 1])
     print(f"{out.relative_to(ROOT)}  {up.shape[1]}x{up.shape[0]}")
 
 

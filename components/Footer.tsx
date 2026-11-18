@@ -4,21 +4,21 @@ import { IconFacebook, IconInstagram, IconLinkedin } from "./Icons";
 
 const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
-    title: "Particuliers",
+    title: "Automobilistes",
     links: [
       { label: "Nos services", href: "/#services" },
       { label: "Comment ça marche", href: "/#comment-ca-marche" },
-      { label: "Questions fréquentes", href: "/contact#faq" },
+      { label: "Questions fréquentes", href: "/#faq" },
       { label: "Télécharger l'app", href: "/#telecharger" },
     ],
   },
   {
-    title: "Mécaniciens / Pro",
+    title: "Vroom Pro",
     links: [
       { label: "Devenir partenaire", href: "/pro" },
       { label: "Avantages", href: "/pro#avantages" },
       { label: "Offre Pro", href: "/pro#offre" },
-      { label: "FAQ Pro", href: "/contact#faq" },
+      { label: "FAQ Pro", href: "/pro#faq-pro" },
     ],
   },
   {

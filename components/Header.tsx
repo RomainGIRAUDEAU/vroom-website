@@ -7,10 +7,10 @@ import Logo from "./Logo";
 import { IconClose, IconDownload, IconMenu } from "./Icons";
 
 const NAV = [
-  { label: "Particuliers", href: "/" },
-  { label: "Mécaniciens / Pro", href: "/pro" },
-  { label: "Entreprises", href: "/entreprises" },
   { label: "Comment ça marche", href: "/#comment-ca-marche" },
+  { label: "Services", href: "/#services" },
+  { label: "Vroom Pro", href: "/pro" },
+  { label: "Entreprises", href: "/entreprises" },
   { label: "À propos", href: "/a-propos" },
   { label: "Contact", href: "/contact" },
 ];
@@ -32,8 +32,7 @@ export default function Header() {
   }, [pathname]);
 
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    if (href.startsWith("/#")) return pathname === "/";
+    if (href.startsWith("/#")) return false;
     return pathname === href;
   };
 

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Visual from "@/components/Visual";
 import HeroPhoto from "@/components/HeroPhoto";
+import Faq, { FAQ_PRO } from "@/components/Faq";
+import StoreBadges from "@/components/StoreBadges";
 import {
   IconArrowRight,
   IconCard,
@@ -67,13 +69,20 @@ function ProHero() {
             <br />
             <span className="text-vroom-yellow">Développez votre activité.</span>
           </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-300 md:text-lg">
-            Recevez des demandes proches de vous, choisissez vos interventions et gardez le contrôle.
+          <p className="mt-6 max-w-lg text-lg font-semibold leading-snug text-white">
+            Vroom Pro vous envoie des demandes de dépannage et d&apos;entretien d&apos;automobilistes près de chez vous.
+          </p>
+          <p className="mt-3 max-w-md text-base leading-relaxed text-zinc-300">
+            Vous choisissez les missions qui vous intéressent, vous fixez votre prix dans le devis, vous êtes
+            payé via l&apos;app.
           </p>
           <div className="mt-8">
             <Link href="#offre" className="btn-yellow !px-7 !py-3.5 !text-base">
-              Rejoindre Vroom Pro
+              Essayer 30 jours offerts
               <IconArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="#comment-ca-marche" className="btn-outline ml-3 !py-3.5">
+              Comment ça marche ?
             </Link>
           </div>
           <div className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10">
@@ -133,15 +142,15 @@ function Advantages() {
 /* ---------------------------- COMMENT ÇA MARCHE ---------------------------- */
 
 const PRO_STEPS = [
-  { n: "1", icon: IconUserPlus, title: "Créez votre profil", text: "Inscrivez-vous en quelques minutes et présentez votre activité." },
-  { n: "2", icon: IconShield, title: "Validez vos documents", text: "Nous vérifions vos informations pour garantir la confiance de nos clients." },
-  { n: "3", icon: IconBell, title: "Recevez vos premières demandes", text: "Des demandes proches de vous, en temps réel." },
-  { n: "4", icon: IconCard, title: "Intervenez et encaissez", text: "Réalisez l'intervention et soyez payé rapidement." },
+  { n: "1", icon: IconUserPlus, title: "Créez votre profil", text: "Entreprise, SIRET, spécialités et zone d'intervention, directement dans l'app." },
+  { n: "2", icon: IconShield, title: "Validation par Vroom", text: "Notre équipe vérifie votre profil pour garantir la confiance des clients." },
+  { n: "3", icon: IconBell, title: "Recevez des demandes, envoyez vos devis", text: "Les demandes proches arrivent en temps réel. Vous répondez seulement à celles qui vous intéressent." },
+  { n: "4", icon: IconCard, title: "Intervenez et encaissez", text: "Le client paie dans l'app à l'acceptation du devis, l'argent est versé sur votre compte." },
 ];
 
 function ProSteps() {
   return (
-    <section className="section-pad border-t border-white/5">
+    <section id="comment-ca-marche" className="section-pad scroll-mt-24 border-t border-white/5">
       <div className="container-site">
         <h2 className="h2 text-center">Comment ça marche ?</h2>
         <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
@@ -255,7 +264,7 @@ function Pricing() {
             <p className="text-4xl font-extrabold tracking-tight md:text-5xl">
               69,90 € <span className="text-base font-semibold text-zinc-400">/mois</span>
             </p>
-            <p className="mt-2 text-sm text-zinc-400">Sans engagement</p>
+            <p className="mt-2 text-sm text-zinc-400">Sans engagement · <span className="font-semibold text-vroom-yellow">30 jours offerts</span></p>
             <ul className="mt-6 space-y-3">
               {PERKS.map((p) => (
                 <li key={p} className="flex items-center gap-3 text-sm text-zinc-200">
@@ -266,8 +275,8 @@ function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link href="/contact" className="btn-yellow mt-7 w-full">
-              Rejoindre Vroom Pro
+            <Link href="#telecharger-pro" className="btn-yellow mt-7 w-full">
+              Commencer l&apos;essai gratuit
               <IconArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -315,13 +324,48 @@ function ProCta() {
               </ul>
             </div>
             <div className="lg:justify-self-end lg:text-center">
-              <Link href="#offre" className="btn-yellow !px-7 !py-3.5 !text-base">
+              <Link href="#telecharger-pro" className="btn-yellow !px-7 !py-3.5 !text-base">
                 Rejoindre Vroom Pro
                 <IconArrowRight className="h-4 w-4" />
               </Link>
               <p className="mt-3 text-sm text-zinc-300">Rejoignez +1200 pros déjà partenaires</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProFaq() {
+  return (
+    <section id="faq-pro" className="scroll-mt-24 py-10 md:py-14">
+      <div className="container-site grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">FAQ Pro</span>
+          <h2 className="h2 mt-4 text-balance">Vos questions avant de vous lancer.</h2>
+          <p className="lead mt-5">Besoin d&apos;en parler ? Notre équipe vous rappelle.</p>
+          <Link href="/contact" className="btn-outline mt-6">
+            Nous contacter
+            <IconArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <Faq items={FAQ_PRO} />
+      </div>
+    </section>
+  );
+}
+
+function ProDownload() {
+  return (
+    <section id="telecharger-pro" className="scroll-mt-24 py-10 md:py-14">
+      <div className="container-site">
+        <div className="rounded-3xl border border-vroom-yellow/30 bg-vroom-card p-8 text-center md:p-12">
+          <h2 className="h2 text-balance">Prêt à recevoir vos premières demandes ?</h2>
+          <p className="lead mx-auto mt-4 max-w-xl">
+            Téléchargez l&apos;application Vroom, choisissez le mode Pro et créez votre profil. 30 jours offerts, sans engagement.
+          </p>
+          <StoreBadges className="mt-7 justify-center" />
         </div>
       </div>
     </section>
@@ -336,6 +380,8 @@ export default function ProPage() {
       <ProSteps />
       <Pricing />
       <ProCta />
+      <ProFaq />
+      <ProDownload />
     </>
   );
 }
