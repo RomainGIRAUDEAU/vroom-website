@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-vroom-black text-white antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: #ffd60a;
+    color: #050505;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ffd60a;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 md:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-vroom-yellow/60;
+  }
+  .btn-yellow {
+    @apply btn bg-vroom-yellow text-black hover:bg-yellow-300 hover:shadow-yellow-glow active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply btn border border-white/15 bg-white/5 text-white hover:border-vroom-yellow/60 hover:text-vroom-yellow active:scale-[0.98];
+  }
+  .btn-ghost-dark {
+    @apply btn border border-white/10 bg-vroom-card text-white hover:border-vroom-yellow/50;
+  }
+  .card {
+    @apply rounded-2xl border border-vroom-line bg-vroom-card;
+  }
+  .card-hover {
+    @apply card transition-all duration-300 hover:border-vroom-yellow/40 hover:bg-vroom-card2 hover:-translate-y-1;
+  }
+  .badge-label {
+    @apply inline-block rounded-md border border-vroom-yellow/40 bg-vroom-yellow/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-vroom-yellow;
+  }
+  .nav-link {
+    @apply text-sm font-medium text-zinc-300 transition-colors hover:text-white;
+  }
+  .nav-link-active {
+    @apply text-vroom-yellow;
+  }
+  .input-dark {
+    @apply w-full rounded-lg border border-white/10 bg-vroom-card px-4 py-3 text-sm text-white placeholder-zinc-500 transition-colors focus:border-vroom-yellow/60 focus:outline-none;
+  }
+  .section-pad {
+    @apply py-16 md:py-24;
+  }
+  .h2 {
+    @apply text-3xl font-extrabold tracking-tight md:text-[2.6rem] md:leading-[1.1];
+  }
+  .lead {
+    @apply text-base leading-relaxed text-zinc-400 md:text-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .neon-v {
+    text-shadow:
+      0 0 12px rgba(255, 214, 10, 0.9),
+      0 0 40px rgba(255, 214, 10, 0.55),
+      0 0 90px rgba(255, 214, 10, 0.35);
+  }
+}
