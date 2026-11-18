@@ -1,0 +1,79 @@
+name: CI & Deploy (Cloud Run)
+
+# - Pull request / push : type-check + build Next.js.
+# - Push (= merge) sur main : build de l'image Docker, push Artifact Registry,
+#   déploiement Cloud Run `vroom-website` (projet vroom-1776153394).
+# Auth GCP sans clé via Workload Identity Federation (voir scripts/setup-ci.sh).
+# Le déploiement ne garde que l'image : variables d'env et secrets (RESEND_API_KEY,
+# CONTACT_FROM, CONTACT_TO) restent ceux déjà configurés sur le service.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  PROJECT_ID: vroom-1776153394
+  REGION: europe-west1
+  SERVICE: vroom-website
+  IMAGE: europe-west1-docker.pkg.dev/vroom-1776153394/cloud-run-source-deploy/vroom-website
+
+jobs:
+  ci:
+    name: Type-check & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run build
+
+  deploy:
+    name: Deploy to Cloud Run
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.WIF_PROVIDER != ''
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Auth GCP (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.WIF_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build & push image
+        run: |
+          gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
+          docker build -t "${IMAGE}:${GITHUB_SHA}" .
+          docker push "${IMAGE}:${GITHUB_SHA}"
+
+      - name: Deploy
+        run: |
+          gcloud run deploy "${SERVICE}" \
+            --project "${PROJECT_ID}" --region "${REGION}" \
+            --image "${IMAGE}:${GITHUB_SHA}" --quiet
+
+      - name: Smoke test
+        run: |
+          URL=$(gcloud run services describe "${SERVICE}" --project "${PROJECT_ID}" --region "${REGION}" --format='value(status.url)')
+          for p in / /pro /contact /a-propos /entreprises; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "${URL}${p}")
+            echo "${code} ${p}"
+            [ "${code}" = "200" ] || exit 1
+          done

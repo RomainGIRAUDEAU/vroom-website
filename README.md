@@ -36,6 +36,16 @@ Le site est déployé sur **Cloud Run** dans le projet GCP **`vroom-1776153394` 
 - URL de prod : https://vroom-website-981436003035.europe-west1.run.app
 - Service : `vroom-website` (public, 512Mi / 1 CPU, 0–10 instances)
 
+### Déploiement automatique (GitHub Actions)
+
+`.github/workflows/ci-deploy.yml` : chaque PR et chaque push lance type-check + build ; chaque merge/push sur `main`
+construit l'image, la pousse sur Artifact Registry et déploie `vroom-website` sur Cloud Run (smoke test des pages ensuite).
+Auth GCP sans clé (Workload Identity Federation). Configuration unique : `bash scripts/setup-ci.sh`
+(compte de service dédié, provider WIF limité au repo, variables GitHub `WIF_PROVIDER` / `WIF_SERVICE_ACCOUNT`,
+auto-merge des PR et CI obligatoire sur `main`). Tant que ces variables n'existent pas, le job de déploiement est ignoré.
+
+### Déploiement manuel
+
 Redéployer depuis la source (Cloud Build construit l'image Docker via le `Dockerfile`, `output: "standalone"`) :
 
 ```bash
