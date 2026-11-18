@@ -1,7 +1,8 @@
 import { IMG } from "@/lib/img";
+import type React from "react";
 import Link from "next/link";
 import Visual from "@/components/Visual";
-import FranceMap from "@/components/FranceMap";
+import HeroPhoto from "@/components/HeroPhoto";
 import PhoneMockup from "@/components/PhoneMockup";
 import StoreBadges from "@/components/StoreBadges";
 import {
@@ -19,6 +20,7 @@ import {
   IconGauge,
   IconHome,
   IconKey,
+  IconPhone,
   IconPin,
   IconShield,
   IconStar,
@@ -34,23 +36,22 @@ import {
 
 function Hero() {
   return (
-    <section className="bg-grid-glow relative overflow-hidden">
-      {/* filigrane V */}
-      <span
-        aria-hidden
-        className="neon-v pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 select-none text-[26rem] font-extrabold leading-none text-vroom-yellow/10 lg:block"
-      >
-        V
-      </span>
-      <div className="container-site relative grid items-center gap-10 pb-16 pt-14 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-24">
-        <div>
-          <h1 className="h2 text-balance !text-4xl md:!text-6xl">
+    <section className="relative overflow-hidden lg:min-h-[640px]">
+      <HeroPhoto
+        src={IMG.heroAccueil}
+        alt="Automobiliste en panne au bord de la route la nuit, une dépanneuse Vroom arrive"
+        position="60% center"
+      />
+      <div className="container-site relative -mt-16 pb-16 lg:mt-0 lg:flex lg:min-h-[640px] lg:items-center lg:pb-10 lg:pt-24">
+        <div className="max-w-xl">
+          <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight md:text-7xl">
             Reprenez
             <br />
             <span className="text-vroom-yellow">le contrôle.</span>
           </h1>
-          <p className="lead mt-6 max-w-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-300 md:text-lg">
             Une panne, une batterie déchargée, un pneu crevé ou un simple besoin d&apos;entretien.
+            <br />
             Vroom vous connecte rapidement à un professionnel proche de vous.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -59,24 +60,27 @@ function Hero() {
               <IconArrowRight className="h-4 w-4" />
             </Link>
             <Link href="#telecharger" className="btn-outline">
+              <IconPhone className="h-4 w-4" />
               Télécharger l&apos;application
             </Link>
           </div>
           <div className="mt-9 flex items-center gap-4">
             <div className="flex -space-x-3">
-              {[0, 1, 2, 3].map((i) => (
+              {["JD", "SM", "KL", "AR"].map((i) => (
                 <span
                   key={i}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-vroom-black bg-vroom-card2 text-vroom-yellow"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-vroom-black bg-gradient-to-br from-zinc-600 to-zinc-800 text-[11px] font-bold text-white"
                 >
-                  <IconUser className="h-4 w-4" />
+                  {i}
                 </span>
               ))}
             </div>
             <div className="text-sm">
-              <p className="font-bold text-white">+2500 automobilistes déjà dépannés</p>
+              <p className="text-zinc-200">
+                <span className="font-bold text-white">+2500</span> automobilistes déjà dépannés
+              </p>
               <p className="mt-0.5 flex items-center gap-1.5 text-zinc-400">
-                Note 4,8/5 sur l&apos;app
+                Note <span className="font-bold text-white">4,8/5</span> sur l&apos;app
                 <span className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <IconStar key={i} className="h-3.5 w-3.5 text-vroom-yellow" />
@@ -86,18 +90,6 @@ function Hero() {
             </div>
           </div>
         </div>
-        <Visual
-          src={IMG.heroHome}
-          alt="Voiture sur une route de nuit, feux arrière allumés"
-          priority
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="h-[320px] rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[440px]"
-        >
-          <div className="absolute bottom-5 left-5 rounded-xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-md">
-            <p className="text-xs font-bold uppercase tracking-widest text-vroom-yellow">Assistance 7j/7</p>
-            <p className="mt-1 text-sm text-zinc-300">Un pro intervient près de chez vous</p>
-          </div>
-        </Visual>
       </div>
     </section>
   );
@@ -105,73 +97,99 @@ function Hero() {
 
 /* --------------------- DEUX SOLUTIONS (maquette hero) --------------------- */
 
+function SolutionCard({
+  src,
+  alt,
+  icon: Icon,
+  title,
+  subtitle,
+  text,
+  cta,
+  href,
+}: {
+  src: string;
+  alt: string;
+  icon: (p: { className?: string }) => JSX.Element;
+  title: React.ReactNode;
+  subtitle?: string;
+  text: React.ReactNode;
+  cta: string;
+  href: string;
+}) {
+  return (
+    <div className="group relative flex min-h-[560px] flex-col justify-end overflow-hidden rounded-[28px] border border-vroom-yellow/40 bg-vroom-black p-7 text-center shadow-[0_0_40px_rgba(255,214,10,0.08)] md:p-9">
+      <Visual
+        src={src}
+        alt={alt}
+        className="absolute inset-0"
+        position="center top"
+        imgClassName="transition-transform duration-700 group-hover:scale-105"
+        gradient="from-vroom-black via-vroom-black/60 via-40% to-transparent"
+      />
+      <span className="absolute left-7 top-7 flex h-14 w-14 items-center justify-center rounded-xl border border-vroom-yellow/50 bg-black/60 text-vroom-yellow backdrop-blur">
+        <Icon className="h-7 w-7" />
+      </span>
+      <div className="relative">
+        <h3 className="text-3xl font-extrabold leading-tight md:text-[2.1rem]">{title}</h3>
+        {subtitle && <p className="mt-3 text-lg font-semibold text-white">{subtitle}</p>}
+        <p className="mx-auto mt-3 max-w-xs text-zinc-300">{text}</p>
+        <Link href={href} className="btn-yellow mt-7 w-full !justify-between !py-4 !text-base sm:mx-auto sm:max-w-sm">
+          <span className="flex-1 text-center">{cta}</span>
+          <IconArrowRight className="h-5 w-5" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 function DualSolutions() {
   return (
     <section className="section-pad relative overflow-hidden">
-      <div className="container-site">
-        <div className="mb-12 text-center">
-          <span className="text-6xl font-extrabold text-vroom-yellow neon-v md:text-7xl">V</span>
-          <h2 className="h2 mt-4">
-            Deux solutions,
-            <br />
-            un même <span className="text-vroom-yellow">engagement.</span>
-          </h2>
-          <div className="mx-auto mt-5 h-[3px] w-16 rounded bg-vroom-yellow" />
-          <p className="lead mt-5">L&apos;assistance auto nouvelle génération.</p>
-        </div>
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Particuliers */}
-          <div className="card group relative flex min-h-[480px] flex-col justify-end overflow-hidden border-vroom-yellow/30 p-8">
-            <Visual
-              src={IMG.cardParticuliers}
-              alt="Rue de ville la nuit"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="absolute inset-0"
-              imgClassName="opacity-60 transition-transform duration-700 group-hover:scale-105"
-              gradient="from-black via-black/50 to-black/20"
-            />
-            <div className="relative">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-vroom-yellow/50 bg-black/50 text-vroom-yellow backdrop-blur">
-                <IconUser className="h-6 w-6" />
-              </span>
-              <h3 className="mt-16 text-3xl font-extrabold">Particuliers</h3>
-              <p className="mt-3 max-w-sm text-zinc-300">
-                Besoin d&apos;aide maintenant ? Assistance rapide, transparente et proche de vous.
-              </p>
-              <Link href="#telecharger" className="btn-yellow mt-6 w-full sm:w-auto">
-                Trouver une solution
-                <IconArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-          {/* Pros */}
-          <div className="card group relative flex min-h-[480px] flex-col justify-end overflow-hidden border-vroom-yellow/30 p-8">
-            <Visual
-              src={IMG.cardPros}
-              alt="Dépanneuse chargeant un véhicule"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="absolute inset-0"
-              imgClassName="opacity-60 transition-transform duration-700 group-hover:scale-105"
-              gradient="from-black via-black/50 to-black/20"
-            />
-            <div className="relative">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-vroom-yellow/50 bg-black/50 text-vroom-yellow backdrop-blur">
-                <IconWrench className="h-6 w-6" />
-              </span>
-              <h3 className="mt-16 text-3xl font-extrabold">
-                Mécaniciens /<br />
-                Remorqueurs partenaires
-              </h3>
-              <p className="mt-3 max-w-sm text-zinc-300">
-                Travaillez librement et développez votre activité.
-              </p>
-              <Link href="/pro" className="btn-yellow mt-6 w-full sm:w-auto">
-                Rejoindre Vroom Pro
-                <IconArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+      <div className="container-site grid items-center gap-8 lg:grid-cols-[1fr_auto_1fr] lg:gap-10">
+        <SolutionCard
+          src={IMG.carteParticuliers}
+          alt="Automobiliste au téléphone à côté de sa voiture en panne, capot ouvert"
+          icon={IconUser}
+          title="Particuliers"
+          subtitle="Besoin d’aide maintenant ?"
+          text={<>Assistance rapide, transparente et proche de vous.</>}
+          cta="Trouver une solution"
+          href="#telecharger"
+        />
+        <div className="relative order-first py-4 text-center lg:order-none lg:w-[240px]">
+          <span aria-hidden className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-vroom-yellow/30 to-transparent lg:block" />
+          <div className="relative bg-vroom-black py-6">
+            <span className="neon-v text-7xl font-extrabold leading-none text-vroom-yellow md:text-8xl">V</span>
+            <h2 className="mt-6 text-3xl font-bold leading-tight">
+              Deux solutions,
+              <br />
+              un même
+              <br />
+              <span className="text-vroom-yellow">engagement.</span>
+            </h2>
+            <div className="mx-auto mt-6 h-[2px] w-14 bg-vroom-yellow" />
+            <p className="mt-6 text-lg text-zinc-400">
+              L&apos;assistance auto
+              <br />
+              nouvelle génération.
+            </p>
           </div>
         </div>
+        <SolutionCard
+          src={IMG.cartePros}
+          alt="Dépanneur partenaire Vroom avec sa tablette devant sa dépanneuse"
+          icon={IconWrench}
+          title={
+            <>
+              Mécaniciens /
+              <br />
+              Remorqueurs partenaires
+            </>
+          }
+          text={<>Travaillez librement et développez votre activité.</>}
+          cta="Rejoindre Vroom Pro"
+          href="/pro"
+        />
       </div>
     </section>
   );
@@ -181,13 +199,21 @@ function DualSolutions() {
 
 function Why() {
   return (
-    <section className="section-pad border-t border-white/5">
-      <div className="container-site grid items-center gap-10 lg:grid-cols-2">
-        <div>
-          <span className="badge-label">Pourquoi Vroom existe ?</span>
-          <h2 className="h2 mt-5 text-balance">
-            Parce qu&apos;une panne ne devrait jamais être un moment de{" "}
-            <span className="text-vroom-yellow">solitude.</span>
+    <section className="relative overflow-hidden border-t border-white/5">
+      <div className="relative h-[260px] w-full sm:h-[340px] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[55%]">
+        <Visual
+          src={IMG.conductriceNuit}
+          alt="Automobiliste seule dans sa voiture la nuit, inquiète"
+          className="absolute inset-0"
+          gradient="from-vroom-black via-transparent to-transparent"
+        />
+        <div aria-hidden className="absolute inset-0 hidden bg-gradient-to-r from-vroom-black via-vroom-black/30 to-transparent lg:block" />
+      </div>
+      <div className="container-site relative py-14 lg:flex lg:min-h-[440px] lg:items-center lg:py-20">
+        <div className="max-w-lg">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">Pourquoi Vroom existe ?</span>
+          <h2 className="h2 mt-4 text-balance">
+            Parce qu&apos;une panne ne devrait jamais être un moment de solitude.
           </h2>
           <p className="lead mt-6">
             Chaque jour, des milliers d&apos;automobilistes se retrouvent bloqués sans savoir qui appeler,
@@ -197,13 +223,6 @@ function Why() {
             Vroom est né pour rendre l&apos;assistance automobile plus simple, plus rapide et plus humaine.
           </p>
         </div>
-        <Visual
-          src={IMG.conducteurNuit}
-          alt="Conducteur au volant de nuit, ville en arrière-plan"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="h-[300px] rounded-3xl border border-white/10 md:h-[380px]"
-          gradient="from-vroom-black/70 to-transparent"
-        />
       </div>
     </section>
   );
@@ -226,51 +245,63 @@ function Communities() {
     { icon: IconTow, label: "Remorqueurs" },
   ];
   return (
-    <section className="section-pad">
+    <section className="py-10 md:py-14">
       <div className="container-site">
-        <h2 className="h2 text-center">Une plateforme. Deux communautés.</h2>
-        <div className="relative mt-12 grid gap-6 lg:grid-cols-2">
-          <div className="hidden lg:block" />
-          <span className="pointer-events-none absolute left-1/2 top-1/2 z-10 hidden h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-vroom-yellow/60 bg-vroom-black text-3xl font-extrabold text-vroom-yellow shadow-yellow-glow lg:flex">
-            V
-          </span>
-          <div className="card p-8">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-vroom-yellow text-black">
-              <IconUser className="h-6 w-6" />
-            </span>
-            <h3 className="mt-5 text-2xl font-extrabold">Particuliers</h3>
-            <p className="mt-2 text-sm text-zinc-400">Trouvez rapidement un professionnel proche de vous.</p>
-            <div className="mt-5 grid grid-cols-2 gap-2.5">
-              {particulier.map((s) => (
-                <span key={s.label} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-zinc-300">
-                  <s.icon className="h-4 w-4 text-vroom-yellow" />
-                  {s.label}
+        <div className="rounded-3xl border border-white/10 bg-vroom-card/60 p-6 md:p-10">
+          <h2 className="h2 text-center">Une plateforme. Deux communautés.</h2>
+          <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1fr_auto_1fr]">
+            <div className="card flex flex-col p-7">
+              <div className="flex items-start gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-vroom-yellow text-black">
+                  <IconUser className="h-7 w-7" />
                 </span>
-              ))}
+                <div>
+                  <h3 className="text-xl font-extrabold">Particuliers</h3>
+                  <p className="mt-1 text-sm text-zinc-400">Trouvez rapidement un professionnel proche de vous.</p>
+                </div>
+              </div>
+              <div className="mt-6 grid flex-1 grid-cols-2 content-start gap-x-6 gap-y-3">
+                {particulier.map((s) => (
+                  <span key={s.label} className="flex items-center gap-2.5 text-sm text-zinc-300">
+                    <s.icon className="h-4 w-4 text-vroom-yellow" />
+                    {s.label}
+                  </span>
+                ))}
+              </div>
+              <Link href="#telecharger" className="btn-yellow mt-7 w-full">
+                Je suis un particulier
+                <IconArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-            <Link href="#telecharger" className="btn-yellow mt-6 w-full">
-              Je suis un particulier
-              <IconArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="card p-8">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-vroom-yellow text-black">
-              <IconWrench className="h-6 w-6" />
-            </span>
-            <h3 className="mt-5 text-2xl font-extrabold">Professionnels</h3>
-            <p className="mt-2 text-sm text-zinc-400">Développez votre activité librement.</p>
-            <div className="mt-5 grid grid-cols-2 gap-2.5">
-              {pro.map((s) => (
-                <span key={s.label} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-zinc-300">
-                  <s.icon className="h-4 w-4 text-vroom-yellow" />
-                  {s.label}
+            <div className="relative hidden items-center lg:flex">
+              <span aria-hidden className="absolute inset-x-[-1.5rem] top-1/2 border-t border-dashed border-vroom-yellow/50" />
+              <span className="relative flex h-24 w-24 items-center justify-center rounded-full border border-vroom-yellow/60 bg-vroom-black text-5xl font-extrabold text-vroom-yellow shadow-yellow-glow">
+                <span className="neon-v">V</span>
+              </span>
+            </div>
+            <div className="card flex flex-col p-7">
+              <div className="flex items-start gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-vroom-yellow text-black">
+                  <IconWrench className="h-7 w-7" />
                 </span>
-              ))}
+                <div>
+                  <h3 className="text-xl font-extrabold">Professionnels</h3>
+                  <p className="mt-1 text-sm text-zinc-400">Développez votre activité librement.</p>
+                </div>
+              </div>
+              <div className="mt-6 grid flex-1 content-start gap-y-3">
+                {pro.map((s) => (
+                  <span key={s.label} className="flex items-center gap-2.5 text-sm text-zinc-300">
+                    <s.icon className="h-4 w-4 text-vroom-yellow" />
+                    {s.label}
+                  </span>
+                ))}
+              </div>
+              <Link href="/pro" className="btn-yellow mt-7 w-full">
+                Je suis un professionnel
+                <IconArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-            <Link href="/pro" className="btn-yellow mt-6 w-full">
-              Je suis un professionnel
-              <IconArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </div>
       </div>
@@ -303,23 +334,26 @@ const STEPS = [
 
 function HowItWorks() {
   return (
-    <section id="comment-ca-marche" className="section-pad scroll-mt-24 border-t border-white/5">
+    <section id="comment-ca-marche" className="scroll-mt-24 py-10 md:py-14">
       <div className="container-site">
         <h2 className="h2 text-center">Comment ça fonctionne ?</h2>
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-8 rounded-3xl border border-white/10 bg-vroom-card/60 p-7 md:grid-cols-3 md:gap-4 md:p-10">
           {STEPS.map((s, i) => (
-            <div key={s.n} className="card-hover relative p-7">
-              <span className="absolute right-6 top-6 flex h-7 w-7 items-center justify-center rounded-full bg-vroom-yellow text-xs font-extrabold text-black">
-                {s.n}
+            <div key={s.n} className="relative flex items-start gap-4">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/10 bg-vroom-card2 text-vroom-yellow">
+                <s.icon className="h-7 w-7" />
               </span>
-              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-vroom-yellow/40 bg-vroom-yellow/10 text-vroom-yellow">
-                <s.icon className="h-6 w-6" />
-              </span>
-              <h3 className="mt-5 pr-8 text-lg font-extrabold">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-400">{s.text}</p>
+              <div className="pr-6">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-vroom-yellow text-xs font-extrabold text-black">
+                  {s.n}
+                </span>
+                <h3 className="mt-2 font-extrabold">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{s.text}</p>
+              </div>
               {i < STEPS.length - 1 && (
-                <span className="absolute right-[-1.4rem] top-1/2 hidden -translate-y-1/2 text-vroom-yellow md:block">
-                  <IconArrowRight className="h-5 w-5" />
+                <span aria-hidden className="absolute right-[-1.25rem] top-7 hidden w-10 items-center text-vroom-yellow md:flex">
+                  <span className="flex-1 border-t border-dotted border-zinc-400" />
+                  <IconArrowRight className="h-3.5 w-3.5 text-zinc-300" />
                 </span>
               )}
             </div>
@@ -372,30 +406,28 @@ const MOMENTS = [
 
 function Freedom() {
   return (
-    <section className="section-pad border-t border-white/5">
-      <div className="container-site grid items-center gap-10 lg:grid-cols-2">
-        <Visual
-          src={IMG.mainsMecano}
-          alt="Mécanicien réparant un moteur"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="order-2 h-[280px] rounded-3xl border border-white/10 md:h-[360px] lg:order-1"
-          gradient="from-vroom-black/60 to-transparent"
-        />
-        <div className="order-1 lg:order-2">
-          <span className="badge-label">La liberté de rouler</span>
-          <h2 className="h2 mt-5 text-balance">
-            Derrière chaque intervention, il y a plus qu&apos;une{" "}
-            <span className="text-vroom-yellow">voiture.</span>
-          </h2>
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            {MOMENTS.map((m) => (
-              <span key={m.label} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[13px] text-zinc-300">
-                <m.icon className="h-4 w-4 text-vroom-yellow" />
-                {m.label}
-              </span>
-            ))}
+    <section className="py-10 md:py-14">
+      <div className="container-site">
+        <div className="grid overflow-hidden rounded-3xl border border-white/10 bg-vroom-card lg:grid-cols-[1fr_1.15fr]">
+          <Visual
+            src={IMG.familleRoute}
+            alt="Famille en voiture sur la route au coucher du soleil"
+            className="h-[260px] lg:h-auto lg:min-h-[340px]"
+            gradient="from-vroom-card/80 via-transparent to-transparent lg:bg-gradient-to-l lg:from-vroom-card lg:via-transparent"
+          />
+          <div className="p-8 md:p-10">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">La liberté de rouler</span>
+            <h2 className="h2 mt-4 text-balance">Derrière chaque intervention, il y a plus qu&apos;une voiture.</h2>
+            <div className="mt-7 grid grid-cols-2 gap-5 sm:grid-cols-4">
+              {MOMENTS.map((m) => (
+                <span key={m.label} className="flex items-start gap-2.5 text-[13px] leading-snug text-zinc-300">
+                  <m.icon className="h-6 w-6 shrink-0 text-vroom-yellow" />
+                  {m.label}
+                </span>
+              ))}
+            </div>
+            <p className="mt-7 text-zinc-400">Vroom existe pour que ces moments continuent.</p>
           </div>
-          <p className="lead mt-6">Vroom existe pour que ces moments continuent.</p>
         </div>
       </div>
     </section>
@@ -445,22 +477,26 @@ function Services() {
 
 function Roadmap() {
   return (
-    <section className="section-pad border-t border-white/5">
-      <div className="container-site grid items-center gap-10 rounded-3xl border border-white/10 bg-vroom-card p-8 md:p-12 lg:grid-cols-2">
-        <div>
-          <span className="badge-label">Où va Vroom ?</span>
-          <h2 className="h2 mt-5 text-balance">
-            Construire le futur de l&apos;assistance{" "}
-            <span className="text-vroom-yellow">automobile.</span>
-          </h2>
-          <p className="lead mt-6">
-            Nous construisons un réseau national de professionnels capables d&apos;intervenir rapidement partout en France.
-          </p>
-          <p className="lead mt-4">
-            Notre objectif est simple : rendre l&apos;assistance automobile aussi accessible qu&apos;une course VTC.
-          </p>
+    <section className="py-10 md:py-14">
+      <div className="container-site">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#07090c]">
+          <Visual
+            src={IMG.carteFrance}
+            alt="Carte de France du réseau de professionnels Vroom"
+            className="h-[260px] sm:h-[320px] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[55%]"
+            gradient="from-[#07090c] via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#07090c] lg:via-transparent"
+          />
+          <div className="relative p-8 md:p-12 lg:max-w-[50%]">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-vroom-yellow">Où va Vroom ?</span>
+            <h2 className="h2 mt-4 text-balance">Construire le futur de l&apos;assistance automobile.</h2>
+            <p className="lead mt-6">
+              Nous construisons un réseau national de professionnels capables d&apos;intervenir rapidement partout en France.
+            </p>
+            <p className="lead mt-4">
+              Notre objectif est simple : rendre l&apos;assistance automobile aussi accessible qu&apos;une course VTC.
+            </p>
+          </div>
         </div>
-        <FranceMap className="mx-auto w-full max-w-md" />
       </div>
     </section>
   );
@@ -471,11 +507,9 @@ function Roadmap() {
 function FinalCta() {
   return (
     <section className="section-pad">
-      <div className="container-site rounded-3xl border border-vroom-yellow/25 bg-gradient-to-b from-vroom-card2 to-vroom-card p-10 text-center md:p-16">
-        <h2 className="h2 text-balance">
-          Besoin d&apos;aide ou envie de rejoindre{" "}
-          <span className="text-vroom-yellow">l&apos;aventure ?</span>
-        </h2>
+      <div className="container-site">
+      <div className="rounded-3xl border border-white/10 bg-vroom-card/60 p-10 text-center md:p-14">
+        <h2 className="h2 text-balance">Besoin d&apos;aide ou envie de rejoindre l&apos;aventure ?</h2>
         <p className="lead mt-4">Vroom est là pour vous.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="#telecharger" className="btn-yellow">
@@ -488,6 +522,7 @@ function FinalCta() {
           </Link>
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -497,7 +532,8 @@ function FinalCta() {
 function Download() {
   return (
     <section id="telecharger" className="section-pad scroll-mt-24 border-t border-white/5">
-      <div className="container-site grid items-center gap-12 rounded-3xl border border-white/10 bg-vroom-card p-8 md:p-14 lg:grid-cols-[1fr_auto]">
+      <div className="container-site">
+      <div className="grid items-center gap-12 rounded-3xl border border-white/10 bg-vroom-card p-8 md:p-14 lg:grid-cols-[1fr_auto]">
         <div>
           <span className="badge-label">L&apos;application</span>
           <h2 className="h2 mt-5 text-balance">
@@ -510,6 +546,7 @@ function Download() {
         </div>
         <PhoneMockup className="hidden justify-self-center lg:block" />
       </div>
+      </div>
     </section>
   );
 }
@@ -520,8 +557,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <DualSolutions />
       <Why />
+      <DualSolutions />
       <Communities />
       <HowItWorks />
       <Differentiators />

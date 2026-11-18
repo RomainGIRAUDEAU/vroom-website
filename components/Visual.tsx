@@ -1,9 +1,8 @@
 import React from "react";
 
 /**
- * Visuel de section : illustration SVG générée en local (public/images,
- * scripts/generate-visuals.mjs) — déjà dans la palette noir & jaune Vroom,
- * aucun traitement d'image requis.
+ * Photo de section (public/images/photos, extraites des maquettes client)
+ * avec un dégradé optionnel pour fondre l'image dans le fond noir.
  */
 export default function Visual({
   src,
@@ -11,6 +10,8 @@ export default function Visual({
   className = "",
   imgClassName = "",
   children,
+  priority = false,
+  position = "center",
   gradient = "from-black/80 via-black/20 to-black/30",
 }: {
   src: string;
@@ -18,19 +19,22 @@ export default function Visual({
   className?: string;
   imgClassName?: string;
   priority?: boolean;
-  sizes?: string;
+  position?: string;
   children?: React.ReactNode;
-  gradient?: string;
+  gradient?: string | null;
 }) {
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`${/(^|\s)(absolute|fixed)(\s|$)/.test(className) ? "" : "relative"} overflow-hidden ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        style={{ objectPosition: position }}
         className={`absolute inset-0 h-full w-full object-cover ${imgClassName}`}
       />
-      <div className={`absolute inset-0 bg-gradient-to-t ${gradient}`} aria-hidden />
+      {gradient && <div className={`absolute inset-0 bg-gradient-to-t ${gradient}`} aria-hidden />}
       {children}
     </div>
   );

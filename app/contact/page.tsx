@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HeroPhoto from "@/components/HeroPhoto";
+import { IMG } from "@/lib/img";
 import Faq from "@/components/Faq";
 import ContactForm from "@/components/ContactForm";
 import StoreBadges from "@/components/StoreBadges";
@@ -25,51 +27,51 @@ export const metadata: Metadata = {
 
 function ContactHero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="container-site grid items-center gap-12 pb-16 pt-14 md:pt-20 lg:grid-cols-2 lg:pb-24">
-        <div>
-          <span className="badge-label">Contactez-nous</span>
-          <h1 className="h2 mt-6 text-balance !text-4xl md:!text-[3.4rem]">
+    <section className="relative overflow-hidden lg:min-h-[600px]">
+      <HeroPhoto
+        src={IMG.heroContact}
+        alt="Conseillère du support Vroom avec son casque, souriante, devant un V néon"
+        position="40% center"
+      >
+        <div className="absolute bottom-6 right-4 hidden w-[220px] rounded-2xl border border-white/10 bg-black/75 p-5 backdrop-blur-md md:block lg:bottom-14 lg:right-[max(1.25rem,calc((100vw-1200px)/2+2rem))]">
+          <div className="flex items-start gap-3">
+            <IconClock className="h-8 w-8 shrink-0 text-vroom-yellow" />
+            <div>
+              <p className="text-xs font-semibold text-zinc-200">Réponse moyenne</p>
+              <p className="mt-1 text-2xl font-extrabold">15 min</p>
+            </div>
+          </div>
+          <p className="mt-3 text-xs leading-relaxed text-zinc-400">Nous nous engageons à vous répondre rapidement.</p>
+        </div>
+      </HeroPhoto>
+      <div className="container-site relative -mt-12 pb-16 lg:mt-0 lg:flex lg:min-h-[600px] lg:items-center lg:pb-10 lg:pt-24">
+        <div className="max-w-xl">
+          <span className="text-sm font-semibold uppercase tracking-wide text-vroom-yellow">Contactez-nous</span>
+          <h1 className="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight md:text-[3.4rem]">
             Une question ?
             <br />
-            <span className="text-vroom-yellow">Nous sommes là pour vous.</span>
+            <span className="text-vroom-yellow">Nous sommes là</span>
+            <br />
+            pour vous.
           </h1>
-          <p className="lead mt-6 max-w-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-300 md:text-lg">
             Notre équipe vous répond rapidement et vous accompagne dans toutes vos demandes.
           </p>
-          <div className="mt-8 grid max-w-md gap-3 sm:grid-cols-2">
-            <Link href="#formulaire" className="card-hover flex items-center gap-3 p-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-vroom-yellow/10 text-vroom-yellow">
-                <IconUser className="h-5 w-5" />
-              </span>
+          <div className="mt-8 grid max-w-[36rem] gap-3 sm:grid-cols-2">
+            <Link href="#formulaire" className="card-hover flex items-center gap-3 bg-black/60 p-4 backdrop-blur">
+              <IconUser className="h-7 w-7 shrink-0 text-vroom-yellow" />
               <span>
                 <span className="block text-sm font-bold">Je suis un particulier</span>
-                <span className="block text-xs text-zinc-400">Besoin d'aide ou d'assistance</span>
+                <span className="block text-[11px] text-zinc-400">Besoin d&apos;aide ou d&apos;assistance</span>
               </span>
             </Link>
-            <Link href="/pro" className="card-hover flex items-center gap-3 p-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-vroom-yellow/10 text-vroom-yellow">
-                <IconWrench className="h-5 w-5" />
-              </span>
+            <Link href="/pro" className="card-hover flex items-center gap-3 bg-black/60 p-4 backdrop-blur">
+              <IconWrench className="h-7 w-7 shrink-0 text-vroom-yellow" />
               <span>
                 <span className="block text-sm font-bold">Je suis un professionnel</span>
-                <span className="block text-xs text-zinc-400">Mécanicien ou remorqueur partenaire</span>
+                <span className="block text-[11px] text-zinc-400">Mécanicien ou remorqueur partenaire</span>
               </span>
             </Link>
-          </div>
-        </div>
-        <div className="relative flex h-[340px] items-center justify-center overflow-hidden rounded-3xl border border-vroom-yellow/25 bg-gradient-to-b from-vroom-card2 to-vroom-black md:h-[420px]">
-          {/* visuel néon V */}
-          <span className="neon-v select-none text-[10rem] font-extrabold leading-none text-vroom-yellow md:text-[13rem]">V</span>
-          <div className="absolute bottom-5 right-5 flex items-start gap-3 rounded-xl border border-white/10 bg-black/70 p-4 backdrop-blur-md">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-vroom-yellow/15 text-vroom-yellow">
-              <IconClock className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="text-[11px] font-semibold text-zinc-400">Réponse moyenne</p>
-              <p className="text-lg font-extrabold text-white">15 min</p>
-              <p className="text-[11px] text-zinc-500">Nous nous engageons à vous répondre rapidement.</p>
-            </div>
           </div>
         </div>
       </div>
@@ -88,19 +90,19 @@ const CONTACTS = [
 
 function ContactWays() {
   return (
-    <section className="section-pad border-t border-white/5">
+    <section className="pb-12 md:pb-16">
       <div className="container-site">
-        <h2 className="h2 text-center">Nos moyens de contact</h2>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <h2 className="text-center text-2xl font-bold">Nos moyens de contact</h2>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CONTACTS.map((c) => (
-            <div key={c.title} className="card-hover p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-vroom-yellow/10 text-vroom-yellow">
-                <c.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-4 text-[15px] font-extrabold">{c.title}</h3>
-              {c.lines.map((l) => (
-                <p key={l} className="mt-1 text-[13px] text-zinc-400">{l}</p>
-              ))}
+            <div key={c.title} className="card-hover flex items-start gap-4 p-6">
+              <c.icon className="h-8 w-8 shrink-0 text-vroom-yellow" />
+              <div>
+                <h3 className="font-bold">{c.title}</h3>
+                {c.lines.map((l, i) => (
+                  <p key={l} className={`mt-1 text-[13px] ${i === 0 ? "text-zinc-200" : "text-zinc-400"}`}>{l}</p>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -114,7 +116,7 @@ function ContactWays() {
 function FaqAndForm() {
   return (
     <section id="faq" className="section-pad scroll-mt-24 border-t border-white/5">
-      <div className="container-site grid gap-12 lg:grid-cols-2">
+      <div className="container-site grid gap-12 lg:grid-cols-[1fr_auto_1.15fr]">
         <div>
           <h2 className="h2">Foire aux questions</h2>
           <div className="mt-8">
@@ -129,6 +131,7 @@ function FaqAndForm() {
             <IconArrowRight className="h-4 w-4" />
           </Link>
         </div>
+        <span aria-hidden className="hidden w-px bg-white/10 lg:block" />
         <div id="formulaire" className="scroll-mt-24">
           <h2 className="h2">Envoyez-nous un message</h2>
           <p className="lead mt-4">Remplissez le formulaire, nous vous répondrons dans les plus brefs délais.</p>
@@ -145,16 +148,20 @@ function FaqAndForm() {
 
 function AppCta() {
   return (
-    <section className="section-pad border-t border-white/5">
-      <div className="container-site grid items-center gap-10 rounded-3xl border border-white/10 bg-vroom-card p-8 md:p-12 lg:grid-cols-[auto_1fr_auto]">
-        <PhoneMockup className="hidden lg:block [&>div]:w-[200px]" />
-        <div>
-          <span className="badge-label">Besoin d&apos;une assistance immédiate ?</span>
-          <p className="mt-4 text-lg font-extrabold md:text-xl">
-            Ouvrez l&apos;application Vroom et trouvez un professionnel disponible en quelques clics.
-          </p>
+    <section className="py-12 md:py-16">
+      <div className="container-site">
+        <div className="relative grid items-center gap-8 overflow-hidden rounded-3xl border border-white/10 bg-vroom-card px-8 pt-8 md:px-12 lg:grid-cols-[220px_1fr_auto] lg:pt-0">
+          <div className="hidden h-[190px] self-end overflow-hidden lg:block">
+            <PhoneMockup className="mt-6 origin-top -rotate-12 scale-[0.72]" />
+          </div>
+          <div className="lg:py-10">
+            <h2 className="text-2xl font-bold md:text-3xl">Besoin d&apos;une assistance immédiate ?</h2>
+            <p className="mt-3 max-w-md text-zinc-300">
+              Ouvrez l&apos;application Vroom et trouvez un professionnel disponible en quelques clics.
+            </p>
+          </div>
+          <StoreBadges className="pb-8 lg:justify-end lg:pb-0" />
         </div>
-        <StoreBadges className="lg:justify-end" />
       </div>
     </section>
   );

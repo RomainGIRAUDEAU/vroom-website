@@ -42,9 +42,8 @@ function Mission() {
     <section className="section-pad border-t border-white/5">
       <div className="container-site grid items-center gap-10 lg:grid-cols-2">
         <Visual
-          src={IMG.conducteurNuit}
-          alt="Automobiliste au volant de nuit"
-          sizes="(max-width: 1024px) 100vw, 50vw"
+          src={IMG.familleRoute}
+          alt="Famille en voiture au coucher du soleil"
           className="h-[300px] rounded-3xl border border-white/10 md:h-[400px]"
           gradient="from-vroom-black/70 to-transparent"
         />
@@ -114,9 +113,8 @@ function RivieraFlow() {
     <section className="section-pad border-t border-white/5">
       <div className="container-site grid items-center gap-10 rounded-3xl border border-vroom-yellow/25 bg-gradient-to-b from-vroom-card2 to-vroom-card p-8 md:p-12 lg:grid-cols-2">
         <Visual
-          src={IMG.equipe}
-          alt="L'équipe Riviera Flow au travail"
-          sizes="(max-width: 1024px) 100vw, 50vw"
+          src={IMG.heroContact}
+          alt="Le support Vroom, au service des automobilistes"
           className="h-[280px] rounded-2xl border border-white/10 md:h-[340px]"
           gradient="from-vroom-black/60 to-transparent"
         />

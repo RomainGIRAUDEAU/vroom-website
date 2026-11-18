@@ -7,7 +7,7 @@ Design inspiré des maquettes validées (fond noir, accent jaune `#FFD60A`).
 
 - **Next.js 14** (App Router) + **React 18** + **TypeScript**
 - **Tailwind CSS 3.4**
-- Images : CDN Unsplash (`images.unsplash.com`) via `next/image`
+- Images : photos des maquettes client (`design/maquettes/`) extraites par `scripts/extract-photos.py` → `public/images/photos/*.jpg`
 - Aucune base de données, 100 % statique (SSG)
 
 ## Pages
@@ -47,13 +47,16 @@ gcloud run deploy vroom-website \
   --port 8080
 ```
 
-Le `Dockerfile` produit une image autonome (`.next/standalone` + `public` + `.next/static`, user non-root `nextjs`, port 8080). Les images du site sont servies directement depuis le CDN Unsplash (`images.unoptimized`), donc aucune dépendance externe au build.
+Le `Dockerfile` produit une image autonome (`.next/standalone` + `public` + `.next/static`, user non-root `nextjs`, port 8080). Les photos sont des JPEG statiques dans `public/images/photos`, aucune dépendance externe au build.
 
 ## Structure
 
 ```
 app/            # pages (App Router) + layout + globals.css + icon.svg
-components/     # Header, Footer, icônes SVG, carte de France, mockup app, FAQ, formulaire
-lib/img.ts      # URLs des visuels (CDN Unsplash — aucun binaire dans le repo)
+components/     # Header, Footer, HeroPhoto, Visual, icônes SVG, mockup app, FAQ, formulaire
+lib/img.ts      # chemins des photos (public/images/photos)
+design/maquettes/  # maquettes client RIV-512 (source des photos)
+scripts/extract-photos.py  # découpe + nettoyage + upscale des photos depuis les maquettes
+                   # (pip install opencv-python-headless numpy ; python3 scripts/extract-photos.py)
 app/icon.svg    # favicon (V jaune)
 ```

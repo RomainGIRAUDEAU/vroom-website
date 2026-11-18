@@ -75,9 +75,8 @@ export default function EntreprisesPage() {
             </div>
           </div>
           <Visual
-            src={IMG.moteur}
-            alt="Entretien d'un moteur de véhicule professionnel"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            src={IMG.heroAccueil}
+            alt="Dépanneuse Vroom intervenant de nuit sur un véhicule en panne"
             className="h-[300px] rounded-3xl border border-vroom-yellow/25 shadow-card md:h-[400px]"
           />
         </div>

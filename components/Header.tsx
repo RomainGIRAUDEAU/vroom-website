@@ -44,7 +44,7 @@ export default function Header() {
       }`}
     >
       <div className="container-site flex h-[72px] items-center justify-between gap-6">
-        <Logo />
+        <Logo withPro={pathname === "/pro"} />
         <nav className="hidden items-center gap-7 lg:flex">
           {NAV.map((item) => (
             <Link
